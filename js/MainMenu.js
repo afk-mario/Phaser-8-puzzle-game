@@ -16,8 +16,9 @@ BasicGame.MainMenu.prototype = {
 	    this.game.add.sprite(25, 0, 'frame');
 	    var enterKey = this.game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
 		enterKey.onDown.add(this.startGame, this);
-		var btt_play   = this.game.add.button(this.game.world.centerX - 50 , this.world.centerY + 50, 'btt_play', this.startGame, this, 1, 0, 2);
-	    text = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "- Main Menu - \n Click to Start", {
+		var btt_play   = this.game.add.button(this.game.world.centerX , this.world.centerY + 60, 'btts', this.startGame, this, 'play1', 'play0', 'play2');
+		var btt_abut   = this.game.add.button(this.game.world.centerX - 75 , this.world.centerY + 60, 'btts', this.startGame, this, 'about1', 'about0', 'about2');
+	    text = this.game.add.text(this.game.world.centerX, this.game.world.centerY - 50, "- Main Menu - \n Click to Start", {
 	        font: "20px Arial",
 	        fill: "#0F0F0F",
 	        align: "center"

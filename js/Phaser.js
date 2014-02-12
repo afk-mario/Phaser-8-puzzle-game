@@ -16792,6 +16792,12 @@ Phaser.InputHandler = function (sprite) {
     */
     this.boundsSprite = null;
 
+     /**
+    * @property {Phaser.Group} boundsGroup - A group the bounds of which this sprite is restricted during drag.
+    * @default
+    */
+    this.boundsGroup = null;
+
     /**
     * If this object is set to consume the pointer event then it will stop all propogation from this object on.
     * For example if you had a stack of 6 sprites with the same priority IDs and one consumed the event, none of the others would receive it.
@@ -17394,6 +17400,11 @@ Phaser.InputHandler.prototype = {
                 this.checkBoundsSprite();
             }
 
+            if (this.boundsGroup)
+            {
+                this.checkBoundsGroup();
+            }
+
             if (this.snapOnDrag)
             {
                 this.sprite.cameraOffset.x = Math.round((this.sprite.cameraOffset.x - (this.snapOffsetX % this.snapX)) / this.snapX) * this.snapX + (this.snapOffsetX % this.snapX);
@@ -17420,6 +17431,11 @@ Phaser.InputHandler.prototype = {
             if (this.boundsSprite)
             {
                 this.checkBoundsSprite();
+            }
+
+            if (this.boundsGroup)
+            {
+                this.checkBoundsGroup();
             }
 
             if (this.snapOnDrag)
@@ -17545,7 +17561,7 @@ Phaser.InputHandler.prototype = {
     * @param {Phaser.Rectangle} [boundsRect=null] - If you want to restrict the drag of this sprite to a specific Rectangle, pass the Phaser.Rectangle here, otherwise it's free to drag anywhere.
     * @param {Phaser.Sprite} [boundsSprite=null] - If you want to restrict the drag of this sprite to within the bounding box of another sprite, pass it here.
     */
-    enableDrag: function (lockCenter, bringToTop, pixelPerfect, alphaThreshold, boundsRect, boundsSprite) {
+    enableDrag: function (lockCenter, bringToTop, pixelPerfect, alphaThreshold, boundsRect, boundsSprite, boundsGroup) {
 
         if (typeof lockCenter == 'undefined') { lockCenter = false; }
         if (typeof bringToTop == 'undefined') { bringToTop = false; }
@@ -17553,6 +17569,7 @@ Phaser.InputHandler.prototype = {
         if (typeof alphaThreshold == 'undefined') { alphaThreshold = 255; }
         if (typeof boundsRect == 'undefined') { boundsRect = null; }
         if (typeof boundsSprite == 'undefined') { boundsSprite = null; }
+        if (typeof boundsGroup == 'undefined') {boundsGroup = null;}
 
         this._dragPoint = new Phaser.Point();
         this.draggable = true;
@@ -17571,6 +17588,10 @@ Phaser.InputHandler.prototype = {
         if (boundsSprite)
         {
             this.boundsSprite = boundsSprite;
+        }
+        if(boundsGroup)
+        {
+            this.boundsGroup = boundsGroup;
         }
 
     },
@@ -17827,6 +17848,16 @@ Phaser.InputHandler.prototype = {
             }
         }
 
+    },
+
+    checkBoundsGroup: function () {
+        var i = 0;
+        var spriteTmp = this.boundsSprite;
+        for (i = this.boundsGroup.length - 1; i >= 0; i--) {
+            this.boundsSprite = this.boundsGroup.getAt(i);
+            this.checkBoundsSprite;
+        };
+        this.boundsSprite = spriteTmp;
     }
 
 };

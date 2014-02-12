@@ -11,7 +11,7 @@ BasicGame.Preloader = function (game) {
 BasicGame.Preloader.prototype = {
 
 	preload: function () {
-		this.game.stage.backgroundColor = '#F0F0F0';
+		this.game.stage.backgroundColor = '#FFF';
 
 		//	These are the assets we loaded in Boot.js
 		//	A nice sparkly background and a loading progress bar
@@ -27,6 +27,8 @@ BasicGame.Preloader.prototype = {
 		//	As this is just a Project Template I've not provided these assets, swap them for your own.
 		this.load.image('block', 'img/block.png');
 		this.load.atlasJSONHash('btt_play', 'img/btt.png', 'img/btt.json');
+		this.load.atlasJSONHash('btts', 'img/btts_small.png', 'img/btts_small.json');
+
 		/*this.load.audio('titleMusic', ['audio/main_menu.mp3']);
 		this.load.bitmapFont('caslon', 'fonts/caslon.png', 'fonts/caslon.xml');*/
 		//	+ lots of other required assets here

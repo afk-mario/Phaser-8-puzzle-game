@@ -17,6 +17,30 @@
 	Board.prototype = Object.create(Phaser.Group.prototype);
 	Board.prototype.constructor = Board;
 
+	Board.prototype.genFinal = function (board){
+		var i = 3,
+		j = 3,
+		k = 0;
+		board.arrNumbs = [];
+		this.clearBoard(board);
+
+		for (i = 3; i > 0; i--)
+		{
+			for (j = 3; j > 0; j--){
+				k++;
+				if (k != 9){
+					board.arrNumbs.push(k);
+					var tmp_block =new NumberBlock(board.game, (j-3)*-50 + 50 , (i-3)*-50 + 50,k,board);
+					board.add(tmp_block);
+				}else{
+					board.arrNumbs.push(0);
+				}
+			}
+		}
+		console.log('Board: ' + board.arrNumbs);
+		console.log(board.length);
+	};
+
 	Board.prototype.genRandom = function (board){
 		var i = 3,
 		j = 3,
@@ -31,37 +55,13 @@
 			{
 				for (j = 3; j > 0; j--){
 					if (tempArr[k] !== 0) {
-						var tmp_block =new NumberBlock(board.game,(j*50),(i*50), board.arrNumbs[k]);
+						var tmp_block =new NumberBlock(board.game,(j-3)*-50 + 50 , (i-3)*-50 + 50, board.arrNumbs[k],board);
 						board.add(tmp_block);
 					}k++;
 				}
 			}
 			console.log('Board: ' + board.arrNumbs);
 		}else this.genRandom(board);
-	};
-
-	Board.prototype.genFinal = function (board){
-		var i = 3,
-		j = 3,
-		k = 0;
-		board.arrNumbs = [];
-		this.clearBoard(board);
-
-		for (i = 3; i > 0; i--)
-		{
-			for (j = 3; j > 0; j--){
-				k++;
-				if (k != 9){
-					board.arrNumbs.push(k);
-					var tmp_block =new NumberBlock(board.game, (j*50) , (i*50),k);
-					board.add(tmp_block);
-				}else{
-					board.arrNumbs.push(0);
-				}
-			}
-		}
-		console.log('Board: ' + board.arrNumbs);
-		console.log(board.length);
 	};
 
 	Board.prototype.checkSolvable = function (arr){

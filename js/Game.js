@@ -26,9 +26,10 @@ BasicGame.Game = function (game) {
 BasicGame.Game.prototype = {
 
 	create: function () {
-        this.game.stage.backgroundColor = '#F0F0F0';
+        this.game.stage.backgroundColor = '#FFF';
         this.game.add.sprite(25, 0, 'frame');
-        var btt_play   = this.game.add.button(this.game.world.centerX - 50 , this.world.centerY + 50, 'btt_play', this.shuffleBoard, this, 1, 0, 2);
+        var btt_abut   = this.game.add.button(this.game.world.centerX - 75 , this.world.centerY + 60, 'btts', this.solvedBoard, this, 'restart1', 'restart0', 'restart2');
+        var btt_play   = this.game.add.button(this.game.world.centerX , this.world.centerY + 60, 'btts', this.shuffleBoard, this, 'random1', 'random0', 'random2');
         text = this.game.add.text(this.game.world.centerX, 35, "- 8 Game -", {
             font: "20px Arial",
             fill: "#F0F0F0",
@@ -44,9 +45,7 @@ BasicGame.Game.prototype = {
     },
 
     update: function () {
-
-		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
-
+        this.game.physics.collide(board);
 	},
 
 	quitGame: function (pointer) {
@@ -63,7 +62,9 @@ BasicGame.Game.prototype = {
 
     shuffleBoard: function (){
         board.genRandom(board);
+    },
 
-    }
-
+    solvedBoard: function (){
+        board.genFinal(board);
+    },
 };
