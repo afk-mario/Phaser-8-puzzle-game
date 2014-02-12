@@ -31,7 +31,7 @@
 			{
 				for (j = 3; j > 0; j--){
 					if (tempArr[k] !== 0) {
-						var tmp_block =new NumberBlock(board.game, board.game.world.centerX-(j*50) -12 , 400 - (i*50), board.arrNumbs[k]);
+						var tmp_block =new NumberBlock(board.game,(j*50),(i*50), board.arrNumbs[k]);
 						board.add(tmp_block);
 					}k++;
 				}
@@ -53,7 +53,7 @@
 				k++;
 				if (k != 9){
 					board.arrNumbs.push(k);
-					var tmp_block =new NumberBlock(board.game, board.game.world.centerX-(j*50) -12 , 400 - (i*50),k);
+					var tmp_block =new NumberBlock(board.game, (j*50) , (i*50),k);
 					board.add(tmp_block);
 				}else{
 					board.arrNumbs.push(0);

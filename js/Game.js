@@ -27,13 +27,14 @@ BasicGame.Game.prototype = {
 
 	create: function () {
         this.game.stage.backgroundColor = '#F0F0F0';
-        var btt_play   = this.game.add.button(this.game.world.centerX - 50 , this.world.centerY + 80, 'btt_play', this.shuffleBoard, this, 1, 0, 2);
-        text = this.game.add.text(this.game.world.centerX, 100, "- 8 Game -", {
-            font: "65px Arial",
-            fill: "#0F0F0F",
+        this.game.add.sprite(25, 0, 'frame');
+        var btt_play   = this.game.add.button(this.game.world.centerX - 50 , this.world.centerY + 50, 'btt_play', this.shuffleBoard, this, 1, 0, 2);
+        text = this.game.add.text(this.game.world.centerX, 35, "- 8 Game -", {
+            font: "20px Arial",
+            fill: "#F0F0F0",
             align: "center"
         });
-
+        
         text.anchor.setTo(0.5, 0.5);
         board = new Board(this.game);
         board.genFinal(board);
