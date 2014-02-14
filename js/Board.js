@@ -10,10 +10,12 @@
 		this.m = 0; //Manhattan  - How many moves to get to their final state.
 		this.isGoal = false;
 		this.isSolvable = false;
+		this.moves = 0;
+		this.totalCost = 0;
 
 		if(arrNumbs)this.arrNumbs = arrNumbs;
 		else arrNumbs = [];
-		
+
 		if (parent) this.parent = parent;
 		else this.parent = {};
 	};
@@ -29,7 +31,7 @@
 		this.clearBoard(board);
 
 		for (i = 3; i > 0; i--)
-		{	
+		{
 			for (j = 3; j > 0; j--){
 				k++;
 				if (k != 9){
@@ -79,7 +81,7 @@
 		if (inversion % 2 === 0){
 			console.log("Solvable - " + arr + " - " + inversion);
 			return true;
-		}				
+		}
 		else{
 			console.log("Unsulvable - " + arr + " - " + inversion)
 			return false;
@@ -89,10 +91,10 @@
 	Board.prototype.equals = function (board){
 		if (!board) {return false};
 		if (!board.arrNumbs) {return false};
-		if (this.arrNumbs.length !== board.arrNumbs) {return false};
+		if (this.arrNumbs.length !== board.arrNumbs.length) {return false};
 		var i = 0;
 
-		for (i = this.arrNumbs - 1; i >= 0; i--) {
+		for (i = this.arrNumbs.length - 1; i >= 0; i--) {
 			if(this.arrNumbs[i] != board.arrNumbs[i])
 				return false;
 		}
@@ -112,12 +114,15 @@
 			}k++;console.log('---');
 		}*/
 		console.log('Board: ' + this.arrNumbs);
-		
 	};
 
 	Board.prototype.clearBoard = function(board){
 		board.forEach(this.clearTxt,this,true);
 		board.removeAll();
+	};
+
+	Board.prototype.calcTotalCost = function(){
+		this.totalCost = moves + Manhattan;
 	};
 
 	Board.prototype.clearTxt = function(child){

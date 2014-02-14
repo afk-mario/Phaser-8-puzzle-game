@@ -35,7 +35,7 @@ BasicGame.Game.prototype = {
             fill: "#F0F0F0",
             align: "center"
         });
-        
+
         text.anchor.setTo(0.5, 0.5);
         board = new Board(this.game);
         board.genFinal(board);
@@ -64,6 +64,7 @@ BasicGame.Game.prototype = {
 
     solvedBoard: function (){
         var final  = new Board(this.game);
+        final.genFinal(final);
         var solver = new Solver(this.game, board, final);
         solver.solve();
     },
