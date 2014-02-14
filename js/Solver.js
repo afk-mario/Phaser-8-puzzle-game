@@ -35,8 +35,8 @@
 
         switch(direction){
             case 1: // x <- 0
-            this.arr[this.position] = this.arr[this.position--];
-            this.arr[this.position--] = 0;
+            this.arr[this.position] = this.arr[this.position - 1];
+            this.arr[this.position - 1] = 0;
             break;
             case 2: // up
             switch (this.position){
@@ -130,64 +130,66 @@
             var board_c = this.open[this.open.length - 1];
             var arr = board_c.arrNumbs;
             var i = 0;
+            var position = 0;
             this.close.push(this.open.pop());
             count++;
             console.log('count: ' + count);
 
             for (i = arr.length - 1; i >= 0; i--) {
                 console.log('test');
-                if(arr[i] === 0){
-                    switch(i){
-                        case 0:
-                        this.swap(arr,1,i,board_c);
-                        this.swap(arr,4,i,board_c);
-                        break;
-                        case 1:
-                        this.swap(arr,1,i,board_c);
-                        this.swap(arr,3,i,board_c);
-                        this.swap(arr,4,i,board_c);
-                        break;
-                        case 2:
-                        this.swap(arr,3,i,board_c);
-                        this.swap(arr,4,i,board_c);
-                        break;
-                        case 3:
-                        this.swap(arr,2,i,board_c);
-                        this.swap(arr,3,i,board_c);
-                        this.swap(arr,4,i,board_c);
-                        break;
-                        case 4:
-                        this.swap(arr,1,i,board_c);
-                        this.swap(arr,2,i,board_c);
-                        this.swap(arr,3,i,board_c);
-                        this.swap(arr,4,i,board_c);
-                        break;
-                        case 5:
-                        this.swap(arr,1,i,board_c);
-                        this.swap(arr,2,i,board_c);
-                        this.swap(arr,4,i,board_c);
-                        break;
-                        case 6:
-                        this.swap(arr,2,i,board_c);
-                        this.swap(arr,3,i,board_c);
-                        break;
-                        case 7:
-                        this.swap(arr,1,i,board_c);
-                        this.swap(arr,2,i,board_c);
-                        this.swap(arr,3,i,board_c);
-                        break;
-                        case 8:
-                        this.swap(arr,1,i,board_c);
-                        this.swap(arr,2,i,board_c);
-                        break;
-                    }
-                }
-            };
-            this.open.sort(this.compare);
-            for (var i = open.length - 2; i >= 0; i--) {
-                this.close.push(this.open.pop());
-            };
-            console.log('solving');
+                if(arr[i] === 0)
+                 position = i;
+         }
+
+         switch(position){
+            case 0:
+            this.swap(arr,1,position,board_c);
+            this.swap(arr,4,position,board_c);
+            break;
+            case 1:
+            this.swap(arr,1,position,board_c);
+            this.swap(arr,3,position,board_c);
+            this.swap(arr,4,position,board_c);
+            break;
+            case 2:
+            this.swap(arr,3,position,board_c);
+            this.swap(arr,4,position,board_c);
+            break;
+            case 3:
+            this.swap(arr,2,position,board_c);
+            this.swap(arr,3,position,board_c);
+            this.swap(arr,4,position,board_c);
+            break;
+            case 4:
+            this.swap(arr,1,position,board_c);
+            this.swap(arr,2,position,board_c);
+            this.swap(arr,3,position,board_c);
+            this.swap(arr,4,position,board_c);
+            break;
+            case 5:
+            this.swap(arr,1,position,board_c);
+            this.swap(arr,2,position,board_c);
+            this.swap(arr,4,position,board_c);
+            break;
+            case 6:
+            this.swap(arr,2,position,board_c);
+            this.swap(arr,3,position,board_c);
+            break;
+            case 7:
+            this.swap(arr,1,position,board_c);
+            this.swap(arr,2,position,board_c);
+            this.swap(arr,3,position,board_c);
+            break;
+            case 8:
+            this.swap(arr,1,position,board_c);
+            this.swap(arr,2,position,board_c);
+            break;
         }
-        console.log('Solved: ' + this.open[this.open.length - 1]);
+        this.open.sort(this.compare);
+        for (var i = open.length - 2; i >= 0; i--) {
+            this.close.push(this.open.pop());
+        };
+        console.log('solving');
     };
+    console.log('Solved: ' + this.open[this.open.length - 1]);
+};

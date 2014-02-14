@@ -63,9 +63,9 @@ BasicGame.Game.prototype = {
     },
 
     solvedBoard: function (){
-        var final  = new Board(this.game);
-        final.genFinal(final);
-        var solver = new Solver(this.game, board, final);
+        var fn  = new Board(this.game);
+        fn.genFinal(fn);
+        var solver = new Solver(this.game, board, fn);
         solver.solve();
     },
 };
