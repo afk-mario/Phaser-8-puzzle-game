@@ -37,8 +37,6 @@
 				}
 			}
 		}
-		console.log('Board: ' + board.arrNumbs);
-		console.log(board.length);
 	};
 
 	Board.prototype.genRandom = function (board){
@@ -47,10 +45,10 @@
 		k = 0;
 		board.arrNumbs = [];
 		this.clearBoard(board);
-		console.log('test');
 		var tempArr = [1,2,3,4,5,6,7,8,0];
 		board.arrNumbs = Phaser.Utils.shuffle(tempArr);
 		if (this.checkSolvable(board.arrNumbs)) {
+			board.isSolvable = true;
 			for (i = 3; i > 0; i--)
 			{
 				for (j = 3; j > 0; j--){
@@ -60,22 +58,28 @@
 					}k++;
 				}
 			}
-			console.log('Board: ' + board.arrNumbs);
 		}else this.genRandom(board);
 	};
 
 	Board.prototype.checkSolvable = function (arr){
 		var inversion = 0;
-		console.log(arr);
-		for (var i = arr.length - 1; i >= 0; i--) {
-			if (arr[i] < arr[i--])
-				if (arr[i--] - arr[i] == 1)
+		var i = 0;
+		var j = 0;
+		for (i = arr.length - 1; i >= 0; i--) {
+			for (j = i - 1; j >= 0; j--) {
+				if (arr[j] > arr[i] && arr[i] !== 0 && arr[j] !== 0){
 					inversion++;
-		};
-		if (inversion % 2)
-			return false;
-		else
+				}
+			}
+		}
+		if (inversion % 2 === 0){
+			console.log("Solvable - " + arr + " - " + inversion);
 			return true;
+		}				
+		else{
+			console.log("Unsulvable - " + arr + " - " + inversion)
+			return false;
+		}
 	};
 
 	Board.prototype.clearBoard = function(board){

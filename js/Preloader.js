@@ -26,7 +26,6 @@ BasicGame.Preloader.prototype = {
 		//	Here we load the rest of the assets our game needs.
 		//	As this is just a Project Template I've not provided these assets, swap them for your own.
 		this.load.image('block', 'img/block.png');
-		this.load.atlasJSONHash('btt_play', 'img/btt.png', 'img/btt.json');
 		this.load.atlasJSONHash('btts', 'img/btts_small.png', 'img/btts_small.json');
 
 		/*this.load.audio('titleMusic', ['audio/main_menu.mp3']);

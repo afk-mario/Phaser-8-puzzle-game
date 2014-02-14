@@ -39,9 +39,6 @@ BasicGame.Game.prototype = {
         text.anchor.setTo(0.5, 0.5);
         board = new Board(this.game);
         board.genFinal(board);
-        console.log('Board:');console.log(board.length);
-
-
     },
 
     update: function () {
@@ -61,6 +58,7 @@ BasicGame.Game.prototype = {
     /*==========================================*/
 
     shuffleBoard: function (){
+        console.clear();
         board.genRandom(board);
     },
 

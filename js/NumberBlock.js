@@ -7,7 +7,6 @@ NumberBlock = function (game, x, y, number,board) {
     this.number = number;
     Phaser.Sprite.call(this, game, x, y, 'block');
     this.rect = new Phaser.Rectangle(25,50, 150,150);
-    console.log(this.rect);
     this.inputEnabled = true;
     this.input.enableDrag(true,false,true,0,this.rect,null,board);
     this.input.enableSnap(50,50,true,false,0,0);
