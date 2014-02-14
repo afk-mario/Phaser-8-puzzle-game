@@ -3,15 +3,19 @@
 	Author: Arlefreak
 	*/
 
-	Board = function (game) {
+	Board = function (game, arrNumbs, parent) {
 		this.game = game;
 		Phaser.Group.call(this, game);
 		this.h = 0; //Haming 	 - Wich numbers are not on their place + moves to get there.
 		this.m = 0; //Manhattan  - How many moves to get to their final state.
 		this.isGoal = false;
 		this.isSolvable = false;
-		this.equals = false;
-		this.arrNumbs = [];
+
+		if(arrNumbs)this.arrNumbs = arrNumbs;
+		else arrNumbs = [];
+		
+		if (parent) this.parent = parent;
+		else this.parent = {};
 	};
 
 	Board.prototype = Object.create(Phaser.Group.prototype);
@@ -25,7 +29,7 @@
 		this.clearBoard(board);
 
 		for (i = 3; i > 0; i--)
-		{
+		{	
 			for (j = 3; j > 0; j--){
 				k++;
 				if (k != 9){
@@ -57,7 +61,7 @@
 						board.add(tmp_block);
 					}k++;
 				}
-			}
+			}this.logBoard();
 		}else this.genRandom(board);
 	};
 
@@ -82,10 +86,40 @@
 		}
 	};
 
+	Board.prototype.equals = function (board){
+		if (!board) {return false};
+		if (!board.arrNumbs) {return false};
+		if (this.arrNumbs.length !== board.arrNumbs) {return false};
+		var i = 0;
+
+		for (i = this.arrNumbs - 1; i >= 0; i--) {
+			if(this.arrNumbs[i] != board.arrNumbs[i])
+				return false;
+		}
+		return true;
+	};
+
+	Board.prototype.solve = function(board_f){
+		this.moves = 0;
+	};
+
+	Board.prototype.logBoard = function(){
+		var k = 0;
+		/*for (i = 3; i > 0; i--)
+		{
+			for (j = 3; j > 0; j--){
+				console.log(this.arrNumbs[k+(j-3)*-1]);
+			}k++;console.log('---');
+		}*/
+		console.log('Board: ' + this.arrNumbs);
+		
+	};
+
 	Board.prototype.clearBoard = function(board){
 		board.forEach(this.clearTxt,this,true);
 		board.removeAll();
 	};
+
 	Board.prototype.clearTxt = function(child){
 		child.txt.destroy();
 	};
