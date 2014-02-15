@@ -38,14 +38,15 @@ BasicGame.Game.prototype = {
 
         text.anchor.setTo(0.5, 0.5);
         board = new Board(this.game);
-        board.genFinal(board);
+        board.genFinal();
+        board.draw();
     },
 
     update: function () {
         this.game.physics.collide(board);
-	},
+    },
 
-	quitGame: function (pointer) {
+    quitGame: function (pointer) {
 
 		//	Here you should destroy anything you no longer need.
 		//	Stop music, delete sprites, purge caches, free resources, all that good stuff.
@@ -59,13 +60,14 @@ BasicGame.Game.prototype = {
 
     shuffleBoard: function (){
         console.clear();
-        board.genRandom(board);
+        board.genRandom();
+        board.draw();
     },
 
     solvedBoard: function (){
         var fn  = new Board(this.game);
-        fn.genFinal(fn);
-        var solver = new Solver(this.game, board, fn);
+        fn.genFinal();
+        var solver = new Solver(this.game, Phaser.Utils.extend(false,{},board), fn);
         solver.solve();
     },
 };

@@ -23,48 +23,20 @@
 	Board.prototype = Object.create(Phaser.Group.prototype);
 	Board.prototype.constructor = Board;
 
-	Board.prototype.genFinal = function (board){
-		var i = 3,
-		j = 3,
-		k = 0;
-		board.arrNumbs = [];
-		this.clearBoard(board);
-
-		for (i = 3; i > 0; i--)
-		{
-			for (j = 3; j > 0; j--){
-				k++;
-				if (k != 9){
-					board.arrNumbs.push(k);
-					var tmp_block =new NumberBlock(board.game, (j-3)*-50 + 50 , (i-3)*-50 + 50,k,board);
-					board.add(tmp_block);
-				}else{
-					board.arrNumbs.push(0);
-				}
-			}
-		}
+	Board.prototype.genFinal = function (){
+		this.arrNumbs = [1,2,3,4,5,6,7,8,0];
+		this.logBoard();
 	};
 
-	Board.prototype.genRandom = function (board){
-		var i = 3,
-		j = 3,
-		k = 0;
-		board.arrNumbs = [];
-		this.clearBoard(board);
+	Board.prototype.genRandom = function (){
+		this.arrNumbs = [];
+		this.clearBoard();
 		var tempArr = [1,2,3,4,5,6,7,8,0];
-		board.arrNumbs = Phaser.Utils.shuffle(tempArr);
-		if (this.checkSolvable(board.arrNumbs)) {
-			board.isSolvable = true;
-			for (i = 3; i > 0; i--)
-			{
-				for (j = 3; j > 0; j--){
-					if (tempArr[k] !== 0) {
-						var tmp_block =new NumberBlock(board.game,(j-3)*-50 + 50 , (i-3)*-50 + 50, board.arrNumbs[k],board);
-						board.add(tmp_block);
-					}k++;
-				}
-			}this.logBoard();
-		}else this.genRandom(board);
+		this.arrNumbs = Phaser.Utils.shuffle(tempArr);
+		if (this.checkSolvable(this.arrNumbs)) {
+			this.isSolvable = true;
+			this.logBoard();
+		}else this.genRandom();
 	};
 
 	Board.prototype.checkSolvable = function (arr){
@@ -106,19 +78,26 @@
 	};
 
 	Board.prototype.logBoard = function(){
-		var k = 0;
-		/*for (i = 3; i > 0; i--)
-		{
-			for (j = 3; j > 0; j--){
-				console.log(this.arrNumbs[k+(j-3)*-1]);
-			}k++;console.log('---');
-		}*/
 		console.log('Board: ' + this.arrNumbs);
 	};
 
-	Board.prototype.clearBoard = function(board){
-		board.forEach(this.clearTxt,this,true);
-		board.removeAll();
+	Board.prototype.draw = function(){
+		this.clearBoard(this);
+		var k = 0;
+		for (i = 3; i > 0; i--)
+		{
+			for (j = 3; j > 0; j--){				
+				if (this.arrNumbs[k] != 0){
+					var tmp_block =new NumberBlock(this.game, (j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k],this);
+					this.add(tmp_block);
+				}k++;
+			}
+		}
+	};
+
+	Board.prototype.clearBoard = function(){
+		this.forEach(this.clearTxt,this,true);
+		this.removeAll();
 	};
 
 	Board.prototype.calcTotalCost = function(){
