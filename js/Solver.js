@@ -30,8 +30,7 @@
 
     Solver.prototype.swap = function(board_c,direction,position){
         this.position = position;
-        //this.board_c = board_c;
-        var bTemp = board_c;
+        var bTemp = Phaser.Utils.extend(true,{},board_c);
         var arrTemp = [];
 
         switch(direction){
@@ -103,16 +102,16 @@
         arrTemp = bTemp.arrNumbs;
         bTemp= new Board(this.game,arrTemp,board_c);
         bTemp.h = this.hueristic(arrTemp);
-        bTemp.moves = board_c.moves++;
+        bTemp.moves = board_c.moves + 1;
         bTemp.calcTotalCost;
         if(!this.checkClosed(bTemp))
             this.open.push(bTemp);
     };
 
     Solver.prototype.checkClosed = function(board){
-        for (var i = close.length - 1; i >= 0; i--) {
-            if (close[i].equals(board)) {
-                true;
+        for (var i = this.close.length - 1; i >= 0; i--) {
+            if (this.close[i].equals(board)) {
+                return true;
             }
         };
     };
@@ -143,46 +142,46 @@
 
          switch(position){
             case 0:
-            this.swap(Phaser.Utils.extend(true,{},board_c),3,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),4,position);
+            this.swap(board_c,3,position);
+            this.swap(board_c,4,position);
             break;
             case 1:
-            this.swap(Phaser.Utils.extend(true,{},board_c),1,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),3,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),4,position);
+            this.swap(board_c,1,position);
+            this.swap(board_c,3,position);
+            this.swap(board_c,4,position);
             break;
             case 2:
-            this.swap(Phaser.Utils.extend(true,{},board_c),1,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),4,position);
+            this.swap(board_c,1,position);
+            this.swap(board_c,4,position);
             break;
             case 3:
-            this.swap(Phaser.Utils.extend(true,{},board_c),2,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),3,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),4,position);
+            this.swap(board_c,2,position);
+            this.swap(board_c,3,position);
+            this.swap(board_c,4,position);
             break;
             case 4:
-            this.swap(Phaser.Utils.extend(true,{},board_c),1,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),2,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),3,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),4,position);
+            this.swap(board_c,1,position);
+            this.swap(board_c,2,position);
+            this.swap(board_c,3,position);
+            this.swap(board_c,4,position);
             break;
             case 5:
-            this.swap(Phaser.Utils.extend(true,{},board_c),1,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),2,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),4,position);
+            this.swap(board_c,1,position);
+            this.swap(board_c,2,position);
+            this.swap(board_c,4,position);
             break;
             case 6:
-            this.swap(Phaser.Utils.extend(true,{},board_c),2,position);
-            this.swap(Phaser.Utils.extend(true,{},board_c),3,position);
+            this.swap(board_c,2,position);
+            this.swap(board_c,3,position);
             break;
             case 7:
-            this.swap(Phaser.Utils.extend(false,{},board_c),1,position);
-            this.swap(Phaser.Utils.extend(false,{},board_c),2,position);
-            this.swap(Phaser.Utils.extend(false,{},board_c),3,position);
+            this.swap(board_c,1,position);
+            this.swap(board_c,2,position);
+            this.swap(board_c,3,position);
             break;
             case 8:
-            this.swap(Phaser.Utils.extend(false,{},board_c),1,position);
-            this.swap(Phaser.Utils.extend(false,{},board_c),2,position);
+            this.swap(board_c,1,position);
+            this.swap(board_c,2,position);
             break;
         }
         this.open.sort(this.compare);
