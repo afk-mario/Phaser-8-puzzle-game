@@ -1,9 +1,16 @@
+/* global Phaser */
+/* global console*/
+/* global Board */
+/* global BasicGame */
+/* global text*/
+
+'use strict' ;
 
 BasicGame.Game = function (game) {
 
 	//	When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
 
-    this.game;		//	a reference to the currently running game
+    /*this.game;		//	a reference to the currently running game
     this.add;		//	used to add sprites, text, groups, etc
     this.camera;	//	a reference to the game camera
     this.cache;		//	the game cache
@@ -19,7 +26,7 @@ BasicGame.Game = function (game) {
     this.physics;	//	the physics manager
     this.rnd;		//	the repeatable random number generator
 
-    this.board;
+    this.board;*/
 
 };
 
@@ -30,23 +37,23 @@ BasicGame.Game.prototype = {
         this.game.add.sprite(25, 0, 'frame');
         var btt_abut   = this.game.add.button(this.game.world.centerX - 75 , this.world.centerY + 60, 'btts', this.solvedBoard, this, 'restart1', 'restart0', 'restart2');
         var btt_play   = this.game.add.button(this.game.world.centerX , this.world.centerY + 60, 'btts', this.shuffleBoard, this, 'random1', 'random0', 'random2');
-        text = this.game.add.text(this.game.world.centerX, 35, "- 8 Game -", {
-            font: "20px Arial",
-            fill: "#F0F0F0",
-            align: "center"
+        text = this.game.add.text(this.game.world.centerX, 35, '- 8 Game -', {
+            font: '20px Arial',
+            fill: '#F0F0F0',
+            align: 'center'
         });
 
         text.anchor.setTo(0.5, 0.5);
-        board = new Board(this.game);
-        board.genFinal();
-        board.draw();
+        this.board = new Board(this.game);
+        this.board.genFinal();
+        this.board.draw();
     },
 
     update: function () {
-        this.game.physics.collide(board);
+        this.game.physics.collide(this.board);
     },
 
-    quitGame: function (pointer) {
+    quitGame: function () {
 
 		//	Here you should destroy anything you no longer need.
 		//	Stop music, delete sprites, purge caches, free resources, all that good stuff.
@@ -60,14 +67,14 @@ BasicGame.Game.prototype = {
 
     shuffleBoard: function (){
         console.clear();
-        board.genRandom();
-        board.draw();
+        this.board.genRandom();
+        this.board.draw();
     },
 
     solvedBoard: function (){
         var fn  = new Board(this.game);
         fn.genFinal();
-        var solver = new Solver(this.game, Phaser.Utils.extend(false,{},board), fn);
+        var solver = new Solver(this.game, Phaser.Utils.extend(false,{},this.board), fn);
         solver.solve();
     },
 };

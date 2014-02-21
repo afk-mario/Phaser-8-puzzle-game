@@ -3,6 +3,9 @@
     Author: Arlefreak
     */
 
+    /* global Phaser */
+    /* global console*/
+
     Solver = function (game, board_i, board_f) {
         this.game = game;
         this.open = [];
@@ -20,12 +23,8 @@
             if (i === arr.length - 1){
                 if(arr[i] !== 0) h++;
             }else if (arr[i] != i + 1 ) h++;
-        };
+        }
         return h;
-    };
-
-    Solver.prototype.manhattan = function(arr, moves){
-        var m = moves;
     };
 
     Solver.prototype.swap = function(board_c,direction,position){
@@ -67,7 +66,7 @@
             }
             break;
             case 3: // 0 -> x
-            bTemp.arrNumbs[this.position] = bTemp.arrNumbs[this.position + 1]
+            bTemp.arrNumbs[this.position] = bTemp.arrNumbs[this.position + 1];
             bTemp.arrNumbs[this.position + 1] = 0;
             break;
             case 4: // down
@@ -103,33 +102,34 @@
         bTemp= new Board(this.game,arrTemp,board_c);
         bTemp.h = this.hueristic(arrTemp);
         bTemp.moves = board_c.moves + 1;
-        bTemp.calcTotalCost;
-        if(!this.checkClosed(bTemp))
+        bTemp.calcTotalCost();
+        if(!this.checkClosed(bTemp)){
             this.open.push(bTemp);
+        }
     };
 
     Solver.prototype.checkClosed = function(board){
-        for (var i = this.close.length - 1; i >= 0; i--) {
-            if (this.close[i].equals(board)) {
+
+        var i = 0;
+        for (i = this.close.length - 1; i >= 0; i--) {
+            if (this.close[i].equals(board))
                 return true;
-            }
-        };
+        }
+        return false;
     };
 
-    function compare(a,b) {
+    Solver.prototype.compare = function(a,b) {
         if (a.totalCost > b.totalCost)
             return -1;
         if (a.totalCost < b.totalCost)
             return 1;
         return 0;
-    }
-
+    };
 
     Solver.prototype.solve = function(){
         var count = 0;
         while(!this.open[this.open.length - 1].equals(this.board_f)){
             var board_c = this.open[this.open.length - 1];
-            var arr = board_c.arrNumbs;
             var i = 0;
             var position = 0;
 
@@ -137,10 +137,11 @@
 
             for (i = board_c.arrNumbs.length - 1; i >= 0; i--) {
                 if(board_c.arrNumbs[i] === 0)
-                 position = i;
-         }
+                   position = i;
+           }
+           //console.log('solving1 - ' + 'count: ' + count + ' - board: ' + board_c.arrNumbs + ' - closed-size: ' + this.close.length + ' - position: ' + position);
 
-         switch(position){
+           switch(position){
             case 0:
             this.swap(board_c,3,position);
             this.swap(board_c,4,position);
@@ -185,11 +186,14 @@
             break;
         }
         this.open.sort(this.compare);
-        for (var i = this.open.length - 1; i > 0; i--) {
+        i = 0;
+        for (i = this.open.length - 1; i > 0; i--) {
             this.close.push(this.open.pop());
         }
         count++;
-        console.log('solving - ' + 'count: ' + count);
-    };
+        console.log('solving2 - ' + 'count: ' + count + ' - board: ' + this.open[0].arrNumbs + ' - closed-size: ' + this.close.length + ' - position: ' + position);
+        //console.log('close: ' + this.close[0].arrNumbs + ' - size: ' + this.close.length);
+        //console.log('open: ' + this.open[0].arrNumbs + ' - size: ' + this.open.length);
+    }
     console.log('Solved: ' + this.open[this.open.length - 1]);
 };

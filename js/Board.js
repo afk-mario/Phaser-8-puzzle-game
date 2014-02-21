@@ -2,12 +2,16 @@
 	Board
 	Author: Arlefreak
 	*/
+	/* global Phaser */
+    /* global console*/
+    /* global NumberBlock */
+
 
 	Board = function (game, arrNumbs, parent) {
 		this.game = game;
 		Phaser.Group.call(this, game);
-		this.h = 0; //Haming 	 - Wich numbers are not on their place + moves to get there.
-		this.m = 0; //Manhattan  - How many moves to get to their final state.
+		this.h = 0; //Haming	- Wich numbers are not on their place + moves to get there.
+		this.m = 0; //Manhattan	- How many moves to get to their final state.
 		this.isGoal = false;
 		this.isSolvable = false;
 		this.moves = 0;
@@ -51,19 +55,19 @@
 			}
 		}
 		if (inversion % 2 === 0){
-			console.log("Solvable - " + arr + " - " + inversion);
+			console.log('Solvable - ' + arr + ' - ' + inversion);
 			return true;
 		}
 		else{
-			console.log("Unsulvable - " + arr + " - " + inversion)
+			console.log('Unsulvable - ' + arr + ' - ' + inversion);
 			return false;
 		}
 	};
 
 	Board.prototype.equals = function (board){
-		if (!board) {return false};
-		if (!board.arrNumbs) {return false};
-		if (this.arrNumbs.length !== board.arrNumbs.length) {return false};
+		if (!board) {return false;}
+		if (!board.arrNumbs) {return false;}
+		if (this.arrNumbs.length !== board.arrNumbs.length) {return false;}
 		var i = 0;
 
 		for (i = this.arrNumbs.length - 1; i >= 0; i--) {
@@ -73,22 +77,20 @@
 		return true;
 	};
 
-	Board.prototype.solve = function(board_f){
-		this.moves = 0;
-	};
-
 	Board.prototype.logBoard = function(){
 		console.log('Board: ' + this.arrNumbs);
 	};
 
 	Board.prototype.draw = function(){
 		this.clearBoard(this);
-		var k = 0;
+		var k = 0,
+			i = 0,
+			j = 0;
 		for (i = 3; i > 0; i--)
 		{
-			for (j = 3; j > 0; j--){				
-				if (this.arrNumbs[k] != 0){
-					var tmp_block =new NumberBlock(this.game, (j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k],this);
+			for (j = 3; j > 0; j--){
+				if (this.arrNumbs[k] !== 0){
+					var tmp_block = new NumberBlock(this.game, (j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k],this);
 					this.add(tmp_block);
 				}k++;
 			}
@@ -101,7 +103,7 @@
 	};
 
 	Board.prototype.calcTotalCost = function(){
-		this.totalCost = moves + Manhattan;
+		this.totalCost = this.moves + this.m;
 	};
 
 	Board.prototype.clearTxt = function(child){
