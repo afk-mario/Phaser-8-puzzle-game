@@ -40,5 +40,5 @@ BasicGame.Preloader.prototype = {
 		this.preloadBar.cropEnabled = false;
 		this.game.state.start('MainMenu');
 
-	},
+	}
 };

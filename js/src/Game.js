@@ -4,7 +4,6 @@
 /* global BasicGame */
 /* global text*/
 
-'use strict' ;
 
 BasicGame.Game = function (game) {
 
@@ -76,5 +75,5 @@ BasicGame.Game.prototype = {
         fn.genFinal();
         var solver = new Solver(this.game, Phaser.Utils.extend(false,{},this.board), fn);
         solver.solve();
-    },
+    }
 };

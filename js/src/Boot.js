@@ -7,7 +7,7 @@ BasicGame.Boot = function (game) {
 BasicGame.Boot.prototype = {
 
     preload: function () {
-        
+
         //  Here we load the assets required for our preloader (in this case a background and a loading bar)
         this.load.image('loadingBG', 'js/res/img/LoadingBG.png');
         this.load.image('loading', 'js/res/img/Loading.png');
