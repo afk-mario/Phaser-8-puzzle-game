@@ -3,7 +3,7 @@
 	Author: Arlefreak
 	*/
 
-	'use strict';
+	//'use strict';
 
 	Board = function (game, arrNumbs, parent) {
 		this.game = game;
