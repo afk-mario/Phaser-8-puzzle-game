@@ -66,7 +66,9 @@ BasicGame.Game.prototype = {
 
     shuffleBoard: function (){
         console.clear();
-        this.board.genRandom();
+        //this.board.genRandom();
+        this.board.genTest();
+        
         this.board.draw();
     },
 

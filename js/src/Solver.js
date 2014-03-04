@@ -31,7 +31,7 @@
         this.position = position;
         var bTemp = Phaser.Utils.extend(true,{},board_c);
         var arrTemp = [];
-
+        console.log("Direccion: " + direction);
         switch(direction){
             case 1: // x <- 0
             bTemp.arrNumbs[this.position] =  bTemp.arrNumbs[this.position - 1];
@@ -98,11 +98,13 @@
             }
             break;
         }
+        console.log("Swap : " + bTemp.arrNumbs);
         arrTemp = bTemp.arrNumbs;
         bTemp= new Board(this.game,arrTemp,board_c);
         bTemp.h = this.hueristic(arrTemp);
         bTemp.moves = board_c.moves + 1;
         bTemp.calcTotalCost();
+        console.log("Total Cost: " + bTemp.totalCost + " hueristic: " + bTemp.h);
         if(!this.checkClosed(bTemp)){
             this.open.push(bTemp);
         }
@@ -139,8 +141,8 @@
                 if(board_c.arrNumbs[i] === 0)
                    position = i;
            }
-           //console.log('solving1 - ' + 'count: ' + count + ' - board: ' + board_c.arrNumbs + ' - closed-size: ' + this.close.length + ' - position: ' + position);
-
+           //console.logn('solving1 - ' + 'count: ' + count + ' - board: ' + board_c.arrNumbs + ' - closed-size: ' + this.close.length + ' - position: ' + position);
+           console.log("Position : " + position);
            switch(position){
             case 0:
             this.swap(board_c,3,position);

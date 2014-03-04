@@ -27,7 +27,7 @@ Board.prototype.constructor = Board;
 
 Board.prototype.genFinal = function (){
 	this.arrNumbs = [1,2,3,4,5,6,7,8,0];
-	this.logBoard();
+	//this.logBoard();
 };
 
 Board.prototype.genRandom = function (){
@@ -39,6 +39,13 @@ Board.prototype.genRandom = function (){
 		this.isSolvable = true;
 		this.logBoard();
 	}else {this.genRandom();}
+};
+
+Board.prototype.genTest = function (){
+	this.arrNumbs = [];
+	this.clearBoard();
+	this.arrNumbs = [1,2,3,4,5,6,7,0,8];
+	this.logBoard();
 };
 
 Board.prototype.checkSolvable = function (arr){
@@ -101,7 +108,7 @@ Board.prototype.clearBoard = function(){
 };
 
 Board.prototype.calcTotalCost = function(){
-	this.totalCost = this.moves + this.m;
+	this.totalCost = this.moves + this.h;
 };
 
 Board.prototype.clearTxt = function(child){
