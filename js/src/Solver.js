@@ -166,13 +166,19 @@ Solver.prototype.checkClosed = function(board){
 
     var i = 0;
     for (i = this.close.length - 1; i >= 0; i--) {
-        if (this.close[i].equals(board)){return true;}
+        if (this.close[i].equals(board)){
+            return true;
+        }
     }
     return false;
 };
 
 Solver.prototype.compare = function(a,b) {
-    if (a.totalCost > b.totalCost){return 1;}
-    if (a.totalCost < b.totalCost){return -1;}
+    if (a.totalCost > b.totalCost){
+        return 1;
+    }
+    if (a.totalCost < b.totalCost){
+        return -1;
+    }
     return 0;
 };
