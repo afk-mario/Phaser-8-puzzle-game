@@ -10,6 +10,7 @@ Board = function (game, arrNumbs, parent) {
 	this.game = game;
 	Phaser.Group.call(this, game);
 	this.m = 0; //Manhattan	- How many moves to get to their final state.
+	this.h = 0;
 	this.isGoal = false;
 	this.isSolvable = false;
 	this.moves = 0;
@@ -130,6 +131,17 @@ Board.prototype.draw = function(){
 Board.prototype.clearBoard = function(){
 	this.forEach(this.clearTxt,this,true);
 	this.removeAll();
+};
+
+Board.prototype.calcHueristic = function(){
+	var h = 0;
+    var i = 0;
+    for (i = this.arrNumbs.length - 1; i >= 0; i--) {
+        if(this.arrNumbs[i] !== 0){
+            h +=  Math.abs(i - (this.arrNumbs[i] - 1));
+        }
+    }
+    this.h = h;
 };
 
 Board.prototype.calcTotalCost = function(){
