@@ -44,7 +44,8 @@ Board.prototype.genRandom = function (){
 Board.prototype.genTest = function (){
 	this.arrNumbs = [];
 	this.clearBoard();
-	this.arrNumbs = [1,2,3,4,5,6,7,0,8];
+	this.arrNumbs = [1, 0, 3, 7, 2, 5, 8, 4, 6];
+	console.log('Solvable: ' + this.checkSolvable(this.arrNumbs));
 	this.logBoard();
 };
 

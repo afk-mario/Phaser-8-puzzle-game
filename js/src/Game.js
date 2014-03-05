@@ -66,8 +66,8 @@ BasicGame.Game.prototype = {
 
     shuffleBoard: function (){
         console.clear();
-        //this.board.genRandom();
-        this.board.genTest();
+        this.board.genRandom();
+        //this.board.genTest();
         
         this.board.draw();
     },
@@ -77,5 +77,6 @@ BasicGame.Game.prototype = {
         fn.genFinal();
         var solver = new Solver(this.game, Phaser.Utils.extend(false,{},this.board), fn);
         solver.solve();
+
     }
 };

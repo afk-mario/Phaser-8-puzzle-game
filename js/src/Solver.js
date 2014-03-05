@@ -6,23 +6,25 @@
     /* global Phaser */
     /* global console*/
 
-    Solver = function (game, board_i, board_f) {
+    Solver = function (game, boardI, boardF) {
         this.game = game;
         this.open = [];
         this.close = [];
         this.moves = 0;
-        this.board_i = board_i;
-        this.board_f = board_f;
-        this.open.push(board_i);
+        this.boardI = boardI;
+        this.boardF = boardF;
+        this.open.push(boardI);
     };
 
     Solver.prototype.hueristic = function(arr){
         var h = 0;
         var i = 0;
+        //console.log("a " + arr);
         for (i = arr.length - 1; i >= 0; i--) {
-            if (i === arr.length - 1){
-                if(arr[i] !== 0) h++;
-            }else if (arr[i] != i + 1 ) h++;
+            if(arr[i] !== 0){
+                h +=  Math.abs(i - (arr[i] - 1));
+                //console.log('i: ' + i + ' h: ' + h + ' arr[i]: ' + arr[i]);
+            }
         }
         return h;
     };
@@ -34,69 +36,69 @@
         console.log("Direccion: " + direction);
         switch(direction){
             case 1: // x <- 0
-            bTemp.arrNumbs[this.position] =  bTemp.arrNumbs[this.position - 1];
-            bTemp.arrNumbs[this.position - 1] = 0;
-            break;
+                bTemp.arrNumbs[this.position] =  bTemp.arrNumbs[this.position - 1];
+                bTemp.arrNumbs[this.position - 1] = 0;
+                break;
             case 2: // up
-            switch (this.position){
-                case 3:
-                bTemp.arrNumbs[3] = bTemp.arrNumbs[0];
-                bTemp.arrNumbs[0] = 0;
+                switch (this.position){
+                    case 3:
+                    bTemp.arrNumbs[3] = bTemp.arrNumbs[0];
+                    bTemp.arrNumbs[0] = 0;
+                    break;
+                    case 4:
+                    bTemp.arrNumbs[4] = bTemp.arrNumbs[1];
+                    bTemp.arrNumbs[1] = 0;
+                    break;
+                    case 5:
+                    bTemp.arrNumbs[5] = bTemp.arrNumbs[2];
+                    bTemp.arrNumbs[2] = 0;
+                    break;
+                    case 6:
+                    bTemp.arrNumbs[6] = bTemp.arrNumbs[3];
+                    bTemp.arrNumbs[3] = 0;
+                    break;
+                    case 7:
+                    bTemp.arrNumbs[7] = bTemp.arrNumbs[4];
+                    bTemp.arrNumbs[4] = 0;
+                    break;
+                    case 8:
+                    bTemp.arrNumbs[8] = bTemp.arrNumbs[5];
+                    bTemp.arrNumbs[5] = 0;
+                    break;
+                }
                 break;
-                case 4:
-                bTemp.arrNumbs[4] = bTemp.arrNumbs[1];
-                bTemp.arrNumbs[1] = 0;
-                break;
-                case 5:
-                bTemp.arrNumbs[5] = bTemp.arrNumbs[2];
-                bTemp.arrNumbs[2] = 0;
-                break;
-                case 6:
-                bTemp.arrNumbs[6] = bTemp.arrNumbs[3];
-                bTemp.arrNumbs[3] = 0;
-                break;
-                case 7:
-                bTemp.arrNumbs[7] = bTemp.arrNumbs[4];
-                bTemp.arrNumbs[4] = 0;
-                break;
-                case 8:
-                bTemp.arrNumbs[8] = bTemp.arrNumbs[5];
-                bTemp.arrNumbs[3] = 0;
-                break;
-            }
-            break;
             case 3: // 0 -> x
-            bTemp.arrNumbs[this.position] = bTemp.arrNumbs[this.position + 1];
-            bTemp.arrNumbs[this.position + 1] = 0;
-            break;
+                bTemp.arrNumbs[this.position] = bTemp.arrNumbs[this.position + 1];
+                bTemp.arrNumbs[this.position + 1] = 0;
+                break;
             case 4: // down
-            switch (this.position){
-                case 0:
-                bTemp.arrNumbs[0] = bTemp.arrNumbs[3];
-                bTemp.arrNumbs[3] = 0;
+                switch (this.position){
+                    case 0:
+                    bTemp.arrNumbs[0] = bTemp.arrNumbs[3];
+                    bTemp.arrNumbs[3] = 0;
+                    break;
+                    case 1:
+                    bTemp.arrNumbs[1] = bTemp.arrNumbs[4];
+                    bTemp.arrNumbs[4] = 0;
+                    break;
+                    case 2:
+                    bTemp.arrNumbs[2] = bTemp.arrNumbs[5];
+                    bTemp.arrNumbs[5] = 0;
+                    break;
+                    case 3:
+                    bTemp.arrNumbs[3] = bTemp.arrNumbs[6];
+                    bTemp.arrNumbs[6] = 0;
+                    break;
+                    case 4:
+                    bTemp.arrNumbs[4] = bTemp.arrNumbs[7];
+                    bTemp.arrNumbs[7] = 0;
+                    break;
+                    case 5:
+                    bTemp.arrNumbs[5] = bTemp.arrNumbs[8];
+                    bTemp.arrNumbs[8] = 0;
+                    break;
+                }
                 break;
-                case 1:
-                bTemp.arrNumbs[1] = bTemp.arrNumbs[4];
-                bTemp.arrNumbs[4] = 0;
-                break;
-                case 2:
-                bTemp.arrNumbs[2] = bTemp.arrNumbs[5];
-                bTemp.arrNumbs[5] = 0;
-                break;
-                case 3:
-                bTemp.arrNumbs[3] = bTemp.arrNumbs[6];
-                bTemp.arrNumbs[6] = 0;
-                break;
-                case 4:
-                bTemp.arrNumbs[4] = bTemp.arrNumbs[7];
-                bTemp.arrNumbs[7] = 0;
-                break;
-                case 5:
-                bTemp.arrNumbs[5] = bTemp.arrNumbs[8];
-                bTemp.arrNumbs[8] = 0;
-                break;
-            }
-            break;
         }
         console.log("Swap : " + bTemp.arrNumbs);
         arrTemp = bTemp.arrNumbs;
@@ -104,7 +106,7 @@
         bTemp.h = this.hueristic(arrTemp);
         bTemp.moves = board_c.moves + 1;
         bTemp.calcTotalCost();
-        console.log("Total Cost: " + bTemp.totalCost + " hueristic: " + bTemp.h);
+        //console.log("Total Cost: " + bTemp.totalCost + " hueristic: " + bTemp.h);
         if(!this.checkClosed(bTemp)){
             this.open.push(bTemp);
         }
@@ -122,15 +124,15 @@
 
     Solver.prototype.compare = function(a,b) {
         if (a.totalCost > b.totalCost)
-            return -1;
-        if (a.totalCost < b.totalCost)
             return 1;
+        if (a.totalCost < b.totalCost)
+            return -1;
         return 0;
     };
 
     Solver.prototype.solve = function(){
         var count = 0;
-        while(!this.open[this.open.length - 1].equals(this.board_f)){
+        while(!this.open[this.open.length - 1].equals(this.boardF)){
             var board_c = this.open[this.open.length - 1];
             var i = 0;
             var position = 0;
@@ -139,10 +141,10 @@
 
             for (i = board_c.arrNumbs.length - 1; i >= 0; i--) {
                 if(board_c.arrNumbs[i] === 0)
-                   position = i;
-           }
+                 position = i;
+         }
            //console.logn('solving1 - ' + 'count: ' + count + ' - board: ' + board_c.arrNumbs + ' - closed-size: ' + this.close.length + ' - position: ' + position);
-           console.log("Position : " + position);
+           //console.log("Position : " + position);
            switch(position){
             case 0:
             this.swap(board_c,3,position);
