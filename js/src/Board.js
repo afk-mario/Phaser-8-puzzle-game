@@ -50,7 +50,7 @@ Board.prototype.genTest = function (){
 };
 
 Board.prototype.checkSolvable = function (arr){
-	var inversion = 0;
+	/*var inversion = 0;
 	var i = 0;
 	var j = 0;
 	for (i = arr.length - 1; i >= 0; i--) {
@@ -67,8 +67,32 @@ Board.prototype.checkSolvable = function (arr){
 	else{
 		console.log('Unsulvable - ' + arr + ' - ' + inversion);
 		return false;
+	}*/
+
+	var inversions = 0;
+	var i = 0,
+	j = 0;
+
+	for(i = 0; i < arr.length - 1; i++) {
+		// Check if a larger number exists after the current
+		// place in the array, if so increment inversions.
+		for(j = i + 1; j < arr.length; j++){
+			if(arr[i] > arr[j]){inversions++;}
+		}
+		// Determine if the distance of the blank space from the bottom 
+		// right is even or odd, and increment inversions if it is odd.
+		if(arr[i] === 0 && i % 2 === 1){inversions++;}
 	}
-};
+	if (inversions % 2 === 0) {
+		console.log('Solvable - ' + arr + ' - ' + inversions);
+		return true;
+	}else{
+		console.log('Unsulvable - ' + arr + ' - ' + inversions);
+		return false;
+	}
+	// If inversions is even, the puzzle is solvable.
+    //return (inversions % 2 === 0);
+}
 
 Board.prototype.equals = function (board){
 	if (!board) {return false;}
