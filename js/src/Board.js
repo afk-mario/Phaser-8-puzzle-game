@@ -16,11 +16,19 @@ Board = function (game, arrNumbs, parent) {
 	this.moves = 0;
 	this.totalCost = 0;
 
-	if(arrNumbs){this.arrNumbs = arrNumbs;}
-	else {arrNumbs = [];}
+	if(arrNumbs){
+		this.arrNumbs = arrNumbs;
+	}
+	else {
+		arrNumbs = [];
+	}
 
-	if (parent) {this.parent = parent;}
-	else {this.parent = {};}
+	if (parent) {
+		this.parent = parent;
+	}
+	else {
+		this.parent = {};
+	}
 };
 
 Board.prototype = Object.create(Phaser.Group.prototype);
@@ -39,7 +47,9 @@ Board.prototype.genRandom = function (){
 	if (this.checkSolvable(this.arrNumbs)) {
 		this.isSolvable = true;
 		this.logBoard();
-	}else {this.genRandom();}
+	}else {
+		this.genRandom();
+	}
 };
 
 Board.prototype.genTest = function (){
@@ -78,11 +88,15 @@ Board.prototype.checkSolvable = function (arr){
 		// Check if a larger number exists after the current
 		// place in the array, if so increment inversions.
 		for(j = i + 1; j < arr.length; j++){
-			if(arr[i] > arr[j]){inversions++;}
+			if(arr[i] > arr[j]){
+				inversions++;
+			}
 		}
 		// Determine if the distance of the blank space from the bottom 
 		// right is even or odd, and increment inversions if it is odd.
-		if(arr[i] === 0 && i % 2 === 1){inversions++;}
+		if(arr[i] === 0 && i % 2 === 1){
+			inversions++;
+		}
 	}
 	if (inversions % 2 === 0) {
 		console.log('Solvable - ' + arr + ' - ' + inversions);
@@ -96,13 +110,21 @@ Board.prototype.checkSolvable = function (arr){
 }
 
 Board.prototype.equals = function (board){
-	if (!board) {return false;}
-	if (!board.arrNumbs) {return false;}
-	if (this.arrNumbs.length !== board.arrNumbs.length) {return false;}
+	if (!board) {
+		return false;
+	}
+	if (!board.arrNumbs) {
+		return false;
+	}
+	if (this.arrNumbs.length !== board.arrNumbs.length) {
+		return false;
+	}
 	var i = 0;
 
 	for (i = this.arrNumbs.length - 1; i >= 0; i--) {
-		if(this.arrNumbs[i] != board.arrNumbs[i]){return false;}
+		if(this.arrNumbs[i] != board.arrNumbs[i]){
+			return false;
+		}
 	}
 	return true;
 };
@@ -123,7 +145,8 @@ Board.prototype.draw = function(){
 			if (this.arrNumbs[k] !== 0){
 				tmpBlock = new NumberBlock(this.game, (j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k],this);
 				this.add(tmpBlock);
-			}k++;
+			}
+			k++;
 		}
 	}
 };
