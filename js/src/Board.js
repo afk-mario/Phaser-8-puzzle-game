@@ -9,7 +9,6 @@
 Board = function (game, arrNumbs, parent) {
 	this.game = game;
 	Phaser.Group.call(this, game);
-	this.m = 0; //Manhattan	- How many moves to get to their final state.
 	this.h = 0;
 	this.isGoal = false;
 	this.isSolvable = false;
@@ -62,7 +61,7 @@ Board.prototype.genTest = function (){
 };
 
 Board.prototype.checkSolvable = function (arr){
-	/*var inversion = 0;
+	var inversion = 0;
 	var i = 0;
 	var j = 0;
 	for (i = arr.length - 1; i >= 0; i--) {
@@ -79,7 +78,7 @@ Board.prototype.checkSolvable = function (arr){
 	else{
 		console.log('Unsulvable - ' + arr + ' - ' + inversion);
 		return false;
-	}*/
+	}/*
 
 	var inversions = 0;
 	var i = 0,
@@ -107,7 +106,7 @@ Board.prototype.checkSolvable = function (arr){
 		return false;
 	}
 	// If inversions is even, the puzzle is solvable.
-    //return (inversions % 2 === 0);
+    //return (inversions % 2 === 0);*/
 }
 
 Board.prototype.equals = function (board){

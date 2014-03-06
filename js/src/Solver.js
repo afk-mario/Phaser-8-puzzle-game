@@ -17,24 +17,16 @@ Solver.prototype.solve = function(){
     var count = 0;
 
     while(!this.open[this.open.length - 1].equals(this.boardF) && this.open.length > 0){
-        //console.log('\n --- while --- \n');
-        //console.log('Open length: ' + this.open.length);
-        //console.log(this.open[0].arrNumbs);
         var boardC = this.open.pop();
         var i = 0;
         var position = 0;
-        //console.log('Open: ' + this.open[this.open.length - 1].arrNumbs);
 
         this.close.push(Phaser.Utils.extend(true,{},boardC));
-       /* console.log('*** CLOSE *** ' + this.close.length);
-        for (var i = this.close.length - 1; i >= 0; i--) {
-            console.log(this.close[i].arrNumbs);
-        }*/
 
         for (i = boardC.arrNumbs.length - 1; i >= 0; i--) {
             if(boardC.arrNumbs[i] === 0){position = i;}
         }
-        //console.log("Position : " + position);
+
         switch(position){
             case 0:
             this.swap(boardC,3,position);
@@ -80,14 +72,6 @@ Solver.prototype.solve = function(){
             break;
         }
         this.open.sort(this.compare);
-       /* console.log('\n ***  OPEN *** ' + this.open.length);
-        for (var i = this.open.length - 1; i >= 0; i--) {
-            console.log(this.open[i].arrNumbs + ' - ' +  this.open[i].totalCost);
-        }*/
-        /*i = 0;
-        for (i = this.open.length - 1; i > 0; i--) {
-            this.close.push(this.open.pop());
-        }*/
 
         if(this.open.length !== 0){
             this.boardI.arrNumbs = this.open[this.open.length - 1].arrNumbs;
@@ -95,13 +79,6 @@ Solver.prototype.solve = function(){
             count++;
             console.log('solving - ' + 'count: ' + count + ' - board: ' + this.open[0].arrNumbs + ' - closed-size: ' + this.close.length + ' - position: ' + position);
         }
-
-        /*console.log('*** CLOSE2 *** ' + this.close.length);
-        for (var i = this.close.length - 1; i >= 0; i--) {
-            console.log(this.close[i].arrNumbs);
-        }*/
-
-
     }
     this.boardI.draw();
     console.log('Solved: ' + this.open[this.open.length - 1].arrNumbs);
@@ -111,7 +88,7 @@ Solver.prototype.swap = function(boardC,direction,position){
     this.position = position;
     var bTemp = Phaser.Utils.extend(true,{},boardC);
     var arrTemp = [];
-    //console.log("Direccion: " + direction);
+
     switch(direction){
         case 1: // x <- 0
         bTemp.arrNumbs[this.position] =  bTemp.arrNumbs[this.position - 1];
@@ -178,7 +155,6 @@ Solver.prototype.swap = function(boardC,direction,position){
         }
         break;
     }
-    //console.log("Swap : " + bTemp.arrNumbs);
     arrTemp = bTemp.arrNumbs;
     bTemp= new Board(this.game,arrTemp,boardC);
     bTemp.moves = boardC.moves + 1;
@@ -187,7 +163,6 @@ Solver.prototype.swap = function(boardC,direction,position){
     if(!this.checkClosed(bTemp)){
         this.open.push(bTemp);
     }
-     //console.log("Total Cost: " + bTemp.totalCost + " hueristic: " + bTemp.h);
  };
 
  Solver.prototype.checkClosed = function(board){
