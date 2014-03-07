@@ -78,8 +78,8 @@ Board.prototype.checkSolvable = function (arr){
 	else{
 		console.log('Unsulvable - ' + arr + ' - ' + inversion);
 		return false;
-	}/*
-
+	}
+	/*
 	var inversions = 0;
 	var i = 0,
 	j = 0;
@@ -106,7 +106,7 @@ Board.prototype.checkSolvable = function (arr){
 		return false;
 	}
 	// If inversions is even, the puzzle is solvable.
-    //return (inversions % 2 === 0);*/
+	//return (inversions % 2 === 0);*/
 }
 
 Board.prototype.equals = function (board){
@@ -133,6 +133,15 @@ Board.prototype.logBoard = function(){
 	console.log('Board: ' + this.arrNumbs);
 };
 
+Board.prototype.checkPosition = function(_numb){
+	var i = 0;
+	for (i = this.arrNumbs.length - 1; i >= 0; i--) {
+		if(this.arrNumbs[i] === _numb){
+			return i;
+		}
+	}
+}
+
 Board.prototype.draw = function(){
 	this.clearBoard(this);
 	var k = 0,
@@ -158,13 +167,13 @@ Board.prototype.clearBoard = function(){
 
 Board.prototype.calcHueristic = function(){
 	var h = 0;
-    var i = 0;
-    for (i = this.arrNumbs.length - 1; i >= 0; i--) {
-        if(this.arrNumbs[i] !== 0){
-            h +=  Math.abs(i - (this.arrNumbs[i] - 1));
-        }
-    }
-    this.h = h;
+	var i = 0;
+	for (i = this.arrNumbs.length - 1; i >= 0; i--) {
+		if(this.arrNumbs[i] !== 0){
+			h +=  Math.abs(i - (this.arrNumbs[i] - 1));
+		}
+	}
+	this.h = h;
 };
 
 Board.prototype.calcTotalCost = function(){

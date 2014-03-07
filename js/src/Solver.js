@@ -18,14 +18,11 @@ Solver.prototype.solve = function(){
 
     while(!this.open[this.open.length - 1].equals(this.boardF) && this.open.length > 0){
         var boardC = this.open.pop();
-        var i = 0;
         var position = 0;
 
         this.close.push(Phaser.Utils.extend(true,{},boardC));
 
-        for (i = boardC.arrNumbs.length - 1; i >= 0; i--) {
-            if(boardC.arrNumbs[i] === 0){position = i;}
-        }
+        position = boardC.checkPosition(0);
 
         switch(position){
             case 0:

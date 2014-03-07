@@ -43,7 +43,7 @@ BasicGame.Game.prototype = {
     },
 
     update: function () {
-        this.game.physics.collide(this.board);
+        //this.game.physics.collide(this.board);
     },
 
     quitGame: function () {
