@@ -8,9 +8,9 @@ NumberBlock = function (game, x, y, number) {
     this.position = 0;
     this.position0 = 1;
     Phaser.Sprite.call(this, game, x, y, 'block');
-    //this.rect = new Phaser.Rectangle(25,50, 150,150);
-    //this.input.enableDrag(true,false,true,0,this.rect,null,board);
-    //this.input.enableSnap(50,50,true,false,0,0);
+    this.rect = new Phaser.Rectangle(25,50, 150,150);
+    this.input.enableDrag(true,false,true,0,this.rect,null);
+    this.input.enableSnap(50,50,true,false,0,0);
 
    //  Listen for input events on this sprite
    this.inputEnabled = true;
@@ -34,6 +34,11 @@ NumberBlock = function (game, x, y, number) {
 
 NumberBlock.prototype = Object.create(Phaser.Sprite.prototype);
 NumberBlock.prototype.constructor = NumberBlock;
+
+NumberBlock.prototype.update = function() {
+    this.txt.x = this.x + 20;
+    this.txt.y = this.y + 20;
+};
 
 NumberBlock.prototype.move = function(_to){
     var e = this.game.add.tween(this);
