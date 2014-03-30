@@ -4,27 +4,20 @@ Author: Arlefreak
 */
 
 NumberBlock = function (game, x, y, number) {
+    console.log("Inicia NumberBlock");
     this.number = number;
     this.position = 0;
     this.position0 = 1;
     Phaser.Sprite.call(this, game, x, y, 'block');
-    //this.rect = new Phaser.Rectangle(25,50, 150,150);
-    //this.input.enableDrag(true,false,true,0,this.rect,null,board);
-    //this.input.enableSnap(50,50,true,false,0,0);
+    
 
-   //  Listen for input events on this sprite
-   this.inputEnabled = true;
+    //  Listen for input events on this sprite
+    this.inputEnabled = true;
 
-    //  Check the pixel data of the sprite
-    this.input.pixelPerfect = true;
-
-    //  Enable the hand cursor
-    this.input.useHandCursor = true;
-
-    this.events.onInputDown.add(this.onDown, this);
+    this.input.enableDrag(true);
+    //this.events.onInputDown.add(this.onDown, this);
     //this.events.onInputOut.add(outSprite, this);
 
-    this.body.immovable = true;
     this.txt = this.game.add.text(x + 20, y + 20, number, {
         font: "20px Arial",
         fill: "#F0F0F0",
@@ -38,8 +31,8 @@ NumberBlock.prototype.constructor = NumberBlock;
 NumberBlock.prototype.move = function(_to){
     var e = this.game.add.tween(this);
     var t = this.game.add.tween(this.txt);
-    this.group.arrNumbs[this.position0] = this.number;
-    this.group.arrNumbs[this.position] = 0;
+    this.parent.arrNumbs[this.position0] = this.number;
+    this.parent.arrNumbs[this.position] = 0;
     switch(_to){
         case 1: //left
         e.to({ x: this.x - 50 }, 250, Phaser.Easing.Linear.None, false, 0 , 0, false);
@@ -70,9 +63,9 @@ NumberBlock.prototype.move = function(_to){
 }
 
 NumberBlock.prototype.onDown = function(){
-    console.log(this.group.arrNumbs);
-    //this.position = this.group.checkPosition(this.number);
-    this.position0= this.group.checkPosition(0);
+    console.log(this.parent.arrNumbs);
+    this.position = this.parent.checkPosition(this.number);
+    this.position0= this.parent.checkPosition(0);
 
     if (this.position - this.position0 !== 0){
         switch(this.position){
@@ -104,7 +97,7 @@ NumberBlock.prototype.onDown = function(){
             }
             break;
             case 2:
-               switch(this.position0){
+            switch(this.position0){
                 case 1:
                 this.move(1);
                 break;
@@ -142,8 +135,8 @@ NumberBlock.prototype.onDown = function(){
             break;
         }
     }
-    console.log('Numbs: ' + this.group.arrNumbs);
-    console.log(this.group.arrNumbs);
+    console.log('Numbs: ' + this.parent.arrNumbs);
+    console.log(this.parent.arrNumbs);
 
 
 }

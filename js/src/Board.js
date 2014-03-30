@@ -6,7 +6,8 @@
 //'use strict';
 
 
-Board = function (game, arrNumbs, parent) {
+Board = function (game) {
+	console.log("Inicia Boad");
 	this.game = game;
 	Phaser.Group.call(this, game);
 	this.h = 0;
@@ -15,7 +16,7 @@ Board = function (game, arrNumbs, parent) {
 	this.moves = 0;
 	this.totalCost = 0;
 
-	if(arrNumbs){
+	/*if(arrNumbs){
 		this.arrNumbs = arrNumbs;
 	}
 	else {
@@ -27,7 +28,7 @@ Board = function (game, arrNumbs, parent) {
 	}
 	else {
 		this.parent = {};
-	}
+	}*/
 };
 
 Board.prototype = Object.create(Phaser.Group.prototype);
@@ -40,7 +41,6 @@ Board.prototype.genFinal = function (){
 
 Board.prototype.genRandom = function (){
 	this.arrNumbs = [];
-	this.clearBoard();
 	var tempArr = [1,2,3,4,5,6,7,8,0];
 	this.arrNumbs = Phaser.Utils.shuffle(tempArr);
 	if (this.checkSolvable(this.arrNumbs)) {
@@ -53,7 +53,6 @@ Board.prototype.genRandom = function (){
 
 Board.prototype.genTest = function (){
 	this.arrNumbs = [];
-	this.clearBoard();
 	//this.arrNumbs = [1, 0, 3, 7, 2, 5, 8, 4, 6];
 	this.arrNumbs = [6,1,4,0,2,5,3,7,8 ];
 	console.log('Solvable: ' + this.checkSolvable(this.arrNumbs));
@@ -143,7 +142,7 @@ Board.prototype.checkPosition = function(_numb){
 }
 
 Board.prototype.draw = function(){
-	this.clearBoard(this);
+	this.clearBoard();
 	var k = 0,
 	i = 0,
 	j = 0;
@@ -152,7 +151,7 @@ Board.prototype.draw = function(){
 	{
 		for (j = 3; j > 0; j--){
 			if (this.arrNumbs[k] !== 0){
-				tmpBlock = new NumberBlock(this.game, (j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k],this);
+				tmpBlock = new NumberBlock(this.game, (j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k]);
 				this.add(tmpBlock);
 			}
 			k++;
