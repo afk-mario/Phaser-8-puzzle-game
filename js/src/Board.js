@@ -1,16 +1,23 @@
-/*
-	Board
-	Author: Arlefreak
-	*/
-
-//'use strict';
+/**
+* @author       Arlefreak <arlefreak@gmail.com>
+*
+* @overview
+*
+* 8Puzzle - http://www.arlefreak.com/games/8puzzle/play/
+*
+* v0.8.0
+*
+* By Mario Carballo Zama http://www.arlefreak.com
+*
+* This is a Simple 8Puzzle game made with Phaser
+*
+*/
 
 
 Board = function (game, arrNumbs) {
 	this.game = game;
 	Phaser.Group.call(this, game);
 	this.h = 0;
-	this.isGoal = false;
 	this.isSolvable = false;
 	this.moves = 0;
 	this.totalCost = 0;
@@ -28,7 +35,6 @@ Board.prototype.constructor = Board;
 
 Board.prototype.genFinal = function (){
 	this.arrNumbs = [1,2,3,4,5,6,7,8,0];
-	//this.logBoard();
 };
 
 Board.prototype.genRandom = function (){
@@ -73,34 +79,6 @@ Board.prototype.checkSolvable = function (arr){
 		console.log('Unsulvable - ' + arr + ' - ' + inversion);
 		return false;
 	}
-	/*
-	var inversions = 0;
-	var i = 0,
-	j = 0;
-
-	for(i = 0; i < arr.length - 1; i++) {
-		// Check if a larger number exists after the current
-		// place in the array, if so increment inversions.
-		for(j = i + 1; j < arr.length; j++){
-			if(arr[i] > arr[j]){
-				inversions++;
-			}
-		}
-		// Determine if the distance of the blank space from the bottom 
-		// right is even or odd, and increment inversions if it is odd.
-		if(arr[i] === 0 && i % 2 === 1){
-			inversions++;
-		}
-	}
-	if (inversions % 2 === 0) {
-		console.log('Solvable - ' + arr + ' - ' + inversions);
-		return true;
-	}else{
-		console.log('Unsulvable - ' + arr + ' - ' + inversions);
-		return false;
-	}
-	// If inversions is even, the puzzle is solvable.
-	//return (inversions % 2 === 0);*/
 }
 
 Board.prototype.equals = function (board){
@@ -184,7 +162,6 @@ Board.prototype.move = function(_where){
 	}
 	var position0 = this.checkPosition(0);
 	var numberblock = {};
-	console.log(_where + ' - ', position0);
 	if(_where === 'up'){
 		if(position0 >= 6 && position0 <= 8){
 			return false;
@@ -238,5 +215,6 @@ Board.prototype.move = function(_where){
 			this.arrNumbs[position0 + 1] = 0;
 		}
 	}
+	this.moves++;
 	this.logBoard();
 };

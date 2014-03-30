@@ -28,20 +28,22 @@ var upKey;
 var downKey;
 var leftKey;
 var rightKey;
+var movesTxt;
+
 
 Puzzle.Game.prototype = {
 
 	create: function () {
         this.game.stage.backgroundColor = '#FFF';
         this.game.add.sprite(25, 0, 'frame');
-        bttAbut   = this.game.add.button(this.game.world.centerX - 75 , this.world.centerY + 60, 'btts', this.solvedBoard, this, 'restart1', 'restart0', 'restart2');
+        bttAbut   = this.game.add.button(this.game.world.centerX - 75 , this.world.centerY + 60, 'btts', this.solveBoard, this, 'restart1', 'restart0', 'restart2');
         bttPlay   = this.game.add.button(this.game.world.centerX , this.world.centerY + 60, 'btts', this.shuffleBoard, this, 'random1', 'random0', 'random2');
-        var text = this.game.add.text(this.game.world.centerX, 35, '- 8 Game -', {
+        movesTxt = this.game.add.text(this.game.world.centerX, 35, 'Moves: 0', {
             font: '20px Arial',
             fill: '#F0F0F0',
             align: 'center'
         });
-        text.anchor.setTo(0.5, 0.5);
+        movesTxt.anchor.setTo(0.5, 0.5);
 
         upKey = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
         downKey = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
@@ -62,6 +64,7 @@ Puzzle.Game.prototype = {
 
     update: function () {
         //this.game.physics.collide(this.board);
+        movesTxt.setText("Moves: " + this.board.moves);
     },
 
     quitGame: function () {
@@ -84,8 +87,9 @@ Puzzle.Game.prototype = {
         this.board.draw();
     },
 
-    solvedBoard: function (){
+    solveBoard: function (){
         var fn  = new Board(this.game);
+        this.board.moves = 0;
         fn.genFinal();
         //var solver = new Solver(this.game, Phaser.Utils.extend(false,{},this.board), fn);
         var solver = new Solver(this.game,this.board,fn);
