@@ -48,7 +48,8 @@ Board.prototype.genTest = function (){
 	this.arrNumbs = [];
 	this.clearBoard();
 	//this.arrNumbs = [1, 0, 3, 7, 2, 5, 8, 4, 6];
-	this.arrNumbs = [6,1,4,0,2,5,3,7,8 ];
+	//this.arrNumbs = [6,1,4,0,2,5,3,7,8 ];
+	this.arrNumbs = [1,2,3,4,5,6,0,7,8 ];
 	console.log('Solvable: ' + this.checkSolvable(this.arrNumbs));
 	this.logBoard();
 };
@@ -175,4 +176,67 @@ Board.prototype.calcTotalCost = function(){
 
 Board.prototype.clearTxt = function(child){
 	child.txt.destroy();
+};
+
+Board.prototype.move = function(_where){
+	if(window.isMoving){
+		return false;
+	}
+	var position0 = this.checkPosition(0);
+	var numberblock = {};
+	console.log(_where + ' - ', position0);
+	if(_where === 'up'){
+		if(position0 >= 6 && position0 <= 8){
+			return false;
+		}else{
+			numberblock = this.getAt(position0 + 2);
+			numberblock.move(_where);
+
+			this.remove(numberblock);
+			this.addAt(numberblock,position0);
+
+			this.arrNumbs[position0] = this.arrNumbs[position0 + 3];
+			this.arrNumbs[position0 + 3] = 0;
+		}
+	}else if(_where == 'down'){
+		if(position0 >= 0 && position0 <= 2){
+			return false;
+		}else{
+			numberblock = this.getAt(position0 - 3);
+			numberblock.move(_where);
+
+			this.remove(numberblock);
+			this.addAt(numberblock,position0 -1);
+
+			this.arrNumbs[position0] = this.arrNumbs[position0 - 3];
+			this.arrNumbs[position0 - 3] = 0;
+		}
+	}else if(_where == 'right'){
+		if(position0 === 0 || position0 === 3 || position0 === 6){
+			return false;
+		}else{
+			numberblock = this.getAt(position0 - 1);
+			numberblock.move(_where);
+
+			this.remove(numberblock);
+			this.addAt(numberblock,position0 - 1);
+
+			this.arrNumbs[position0] = this.arrNumbs[position0 - 1];
+			this.arrNumbs[position0 - 1] = 0;
+		}
+	}else if(_where == 'left'){
+		if(position0 === 2 || position0 === 5 || position0 === 8){
+			return false;
+		}else{
+			numberblock = this.getAt(position0);
+			numberblock.move(_where);
+
+			this.remove(numberblock);
+			this.addAt(numberblock,position0);
+
+			this.arrNumbs[position0] = this.arrNumbs[position0 + 1];
+			this.arrNumbs[position0 + 1] = 0;
+		}
+	}
+	this.logBoard();
 };

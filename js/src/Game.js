@@ -20,8 +20,14 @@ BasicGame.Game = function (game) {
 
     this.board;*/
 };
+
 var bttAbut;
 var bttPlay;
+
+var upKey;
+var downKey;
+var leftKey;
+var rightKey;
 
 BasicGame.Game.prototype = {
 
@@ -35,13 +41,23 @@ BasicGame.Game.prototype = {
             fill: '#F0F0F0',
             align: 'center'
         });
-
         text.anchor.setTo(0.5, 0.5);
+
+        upKey = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
+        downKey = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+        leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+
         this.board = new Board(this.game);
-
         this.board.genFinal();
-
         this.board.draw();
+
+        upKey.onDown.add(function () { this.board.move('up'); },this);
+        downKey.onDown.add(function () { this.board.move('down'); },this);
+        leftKey.onDown.add(function () { this.board.move('left'); },this);
+        rightKey.onDown.add(function () { this.board.move('right'); },this);
+
+
     },
 
     update: function () {
@@ -63,8 +79,8 @@ BasicGame.Game.prototype = {
     shuffleBoard: function (){
         console.clear();
 
-        this.board.genRandom();
-        //this.board.genTest();
+        //this.board.genRandom();
+        this.board.genTest();
         this.board.draw();
     },
 

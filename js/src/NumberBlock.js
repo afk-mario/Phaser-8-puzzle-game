@@ -31,28 +31,28 @@ NumberBlock.prototype.constructor = NumberBlock;
 NumberBlock.prototype.move = function(_to){
     var e = this.game.add.tween(this);
     var t = this.game.add.tween(this.txt);
-    this.parent.arrNumbs[this.position0] = this.number;
-    this.parent.arrNumbs[this.position] = 0;
+    e.onStart.add(function(){window.isMoving = true;});
+    e.onComplete.add(function(){window.isMoving = false;})
     switch(_to){
-        case 1: //left
+        case 'left':
         e.to({ x: this.x - 50 }, 250, Phaser.Easing.Linear.None, false, 0 , 0, false);
         t.to({ x: this.txt.x - 50 }, 250,null);
         t.start();
         e.start();
         break;
-        case 2: // up
+        case 'up':
         e.to({ y: this.y - 50 }, 250, Phaser.Easing.Linear.None, false, 0 , 0, false);
         t.to({ y: this.txt.y - 50 }, 250,null);
         t.start();
         e.start();
         break;
-        case 3: // right
+        case 'right':
         e.to({ x: this.x + 50 }, 250, Phaser.Easing.Linear.None, false, 0 , 0, false);
         t.to({ x: this.txt.x + 50 }, 250,null);
         t.start();
         e.start();
         break;
-        case 4: //down
+        case 'down':
         e.to({ y: this.y + 50 }, 250, Phaser.Easing.Linear.None, false, 0 , 0, false);
         t.to({ y: this.txt.y + 50 }, 250,null);
         t.start();
