@@ -12,9 +12,9 @@ NumberBlock = function (game, x, y, number) {
     
 
     //  Listen for input events on this sprite
-    this.inputEnabled = true;
+    //this.inputEnabled = true;
 
-    this.input.enableDrag(true);
+    //this.input.enableDrag(true);
     //this.events.onInputDown.add(this.onDown, this);
     //this.events.onInputOut.add(outSprite, this);
 
