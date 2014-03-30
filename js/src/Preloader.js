@@ -1,5 +1,5 @@
 
-BasicGame.Preloader = function (game) {
+Puzzle.Preloader = function (game) {
 
 	this.background = null;
 	this.preloadBar = null;
@@ -8,7 +8,7 @@ BasicGame.Preloader = function (game) {
 
 };
 
-BasicGame.Preloader.prototype = {
+Puzzle.Preloader.prototype = {
 
 	preload: function () {
 		this.game.stage.backgroundColor = '#FFF';

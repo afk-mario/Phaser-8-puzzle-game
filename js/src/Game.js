@@ -1,4 +1,4 @@
-BasicGame.Game = function (game) {
+Puzzle.Game = function (game) {
 
 	//	When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
     this.game = game;
@@ -29,7 +29,7 @@ var downKey;
 var leftKey;
 var rightKey;
 
-BasicGame.Game.prototype = {
+Puzzle.Game.prototype = {
 
 	create: function () {
         this.game.stage.backgroundColor = '#FFF';
@@ -79,8 +79,8 @@ BasicGame.Game.prototype = {
     shuffleBoard: function (){
         console.clear();
 
-        //this.board.genRandom();
-        this.board.genTest();
+        this.board.genRandom();
+        //this.board.genTest();
         this.board.draw();
     },
 

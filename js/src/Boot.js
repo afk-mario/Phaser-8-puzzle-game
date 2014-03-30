@@ -1,10 +1,10 @@
-BasicGame = {};
+Puzzle = {};
 
-BasicGame.Boot = function (game) {
+Puzzle.Boot = function (game) {
 
 };
 
-BasicGame.Boot.prototype = {
+Puzzle.Boot.prototype = {
 
     preload: function () {
 

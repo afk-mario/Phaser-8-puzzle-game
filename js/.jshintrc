@@ -1,5 +1,5 @@
 {
-"globals"       : { "Phaser": false, "PIXI": false, "BasicGame": true, "Board": true, "NumberBlock": true, "Solver": true},
+"globals"       : { "Phaser": false, "PIXI": false, "Puzzle": true, "Board": true, "NumberBlock": true, "Solver": true},
 // Ignore Environment Globals
 "browser"       : true,   // Standard browser globals e.g. `window`, `document`.
 "couch"         : false,
