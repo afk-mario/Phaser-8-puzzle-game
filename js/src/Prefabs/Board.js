@@ -14,8 +14,7 @@
 */
 
 
-Board = function (game, arrNumbs) {
-	this.game = game;
+Board = function (arrNumbs) {
 	Phaser.Group.call(this, game);
 	this.h = 0;
 	this.isSolvable = false;
@@ -127,7 +126,7 @@ Board.prototype.draw = function(){
 	{
 		for (j = 3; j > 0; j--){
 			if (this.arrNumbs[k] !== 0){
-				tmpBlock = new NumberBlock(this.game, (j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k],this);
+				tmpBlock = new NumberBlock((j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k],this);
 				this.add(tmpBlock);
 			}
 			k++;
@@ -224,10 +223,15 @@ Board.prototype.move = function(_where){
 		}
 	}
 <<<<<<< HEAD:js/src/Board.js
+<<<<<<< HEAD:js/src/Board.js
 	this.moves++;
 =======
 	isMoving = false;
 	this.moves ++;
 >>>>>>> Reordering code:js/src/Prefabs/Board.js
+=======
+	isMoving = false;
+	this.moves ++;
+>>>>>>> 458f2c0e1df4d2d5519f9be988d7510540e1a46d:js/src/Prefabs/Board.js
 	this.logBoard();
 };

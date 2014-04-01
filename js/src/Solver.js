@@ -3,8 +3,7 @@ Solver
 Author: Arlefreak
 */
 
-Solver = function (game, boardI, boardF) {
-    this.game = game;
+Solver = function (boardI, boardF) {
     this.open = [];
     this.close = [];
     this.moves = 0;
@@ -153,7 +152,7 @@ Solver.prototype.swap = function(boardC,direction,position){
         break;
     }
     arrTemp = bTemp.arrNumbs;
-    bTemp= new Board(this.game,arrTemp,boardC);
+    bTemp= new Board(arrTemp,boardC);
     bTemp.moves = boardC.moves + 1;
     bTemp.calcHueristic();
     bTemp.calcTotalCost();
