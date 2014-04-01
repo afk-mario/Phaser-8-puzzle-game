@@ -21,19 +21,8 @@ NumberBlock = function (x, y, number) {
     //this.input.enableDrag(true);
     //this.events.onInputDown.add(this.onDown, this);
     //this.events.onInputOut.add(outSprite, this);
-
-<<<<<<< HEAD:js/src/NumberBlock.js
-<<<<<<< HEAD:js/src/NumberBlock.js
-    this.txt = this.game.add.text(x + 20, y + 20, number, {
-        font: "20px Arial",
-=======
     this.txt = game.add.text(x + 20, y + 20, number, {
         font: "20px Source Code Pro",
->>>>>>> Reordering code:js/src/Prefabs/NumberBlock.js
-=======
-    this.txt = game.add.text(x + 20, y + 20, number, {
-        font: "20px Source Code Pro",
->>>>>>> 458f2c0e1df4d2d5519f9be988d7510540e1a46d:js/src/Prefabs/NumberBlock.js
         fill: "#F0F0F0",
         align: "center"
     });
@@ -48,23 +37,10 @@ NumberBlock.prototype.update = function() {
 };
 
 NumberBlock.prototype.move = function(_to){
-<<<<<<< HEAD:js/src/NumberBlock.js
-<<<<<<< HEAD:js/src/NumberBlock.js
-    var e = this.game.add.tween(this);
-    var t = this.game.add.tween(this.txt);
-    e.onStart.add(function(){window.isMoving = true;});
-    e.onComplete.add(function(){window.isMoving = false;})
-=======
-=======
->>>>>>> 458f2c0e1df4d2d5519f9be988d7510540e1a46d:js/src/Prefabs/NumberBlock.js
     var e = game.add.tween(this);
     var t = game.add.tween(this.txt);
     e.onStart.add(function(){isMoving = true;});
     e.onComplete.add(function(){isMoving = false;})
-<<<<<<< HEAD:js/src/NumberBlock.js
->>>>>>> Reordering code:js/src/Prefabs/NumberBlock.js
-=======
->>>>>>> 458f2c0e1df4d2d5519f9be988d7510540e1a46d:js/src/Prefabs/NumberBlock.js
     switch(_to){
         case 'left':
         e.to({ x: this.x - 50 }, 250, Phaser.Easing.Linear.None, false, 0 , 0, false);

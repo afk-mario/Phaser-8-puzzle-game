@@ -1,10 +1,4 @@
 {
-<<<<<<< HEAD:js/.jshintrc
-<<<<<<< HEAD:js/.jshintrc
-"globals"       : { "Phaser": false, "PIXI": false, "Puzzle": true, "Board": true, "NumberBlock": true, "Solver": true},
-=======
-=======
->>>>>>> 458f2c0e1df4d2d5519f9be988d7510540e1a46d:.jshintrc
 "globals"       : { 
 "Phaser": false,
 "PIXI": false,
@@ -20,10 +14,6 @@
 "PlayS": true,
 "game": true
 },
-<<<<<<< HEAD:js/.jshintrc
->>>>>>> Reordering code:.jshintrc
-=======
->>>>>>> 458f2c0e1df4d2d5519f9be988d7510540e1a46d:.jshintrc
 // Ignore Environment Globals
 "browser"       : true,   // Standard browser globals e.g. `window`, `document`.
 "couch"         : false,

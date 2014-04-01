@@ -222,16 +222,8 @@ Board.prototype.move = function(_where){
 			this.arrNumbs[position0 + 1] = 0;
 		}
 	}
-<<<<<<< HEAD:js/src/Board.js
-<<<<<<< HEAD:js/src/Board.js
-	this.moves++;
-=======
+
 	isMoving = false;
 	this.moves ++;
->>>>>>> Reordering code:js/src/Prefabs/Board.js
-=======
-	isMoving = false;
-	this.moves ++;
->>>>>>> 458f2c0e1df4d2d5519f9be988d7510540e1a46d:js/src/Prefabs/Board.js
 	this.logBoard();
 };
