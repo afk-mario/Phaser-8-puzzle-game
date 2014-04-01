@@ -15,12 +15,12 @@
                 'btts', this.shuffleBoard, this,
                 'random1', 'random0', 'random2');
             
-            this.text = game.add.text(game.world.centerX, 35, '- 8 Game -', {
-                font: '20px Arial',
-                fill: '#F0F0F0',
+            this.movesTxt = game.add.text(game.world.centerX, 35, 'Moves: ', {
+                font: "25px Source Code Pro",
+                fill: '#FFF',
                 align: 'center'
             });
-            this.text.anchor.setTo(0.5, 0.5);
+            this.movesTxt.anchor.setTo(0.5, 0.5);
 
             this.upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
             this.downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
@@ -37,7 +37,7 @@
             this.rightKey.onDown.add(function () { this.board.move('right'); },this);
         },
         update: function() {
-
+            this.movesTxt.setText('Moves: ' + this.board.moves);
         },
         
         quitGame: function () {

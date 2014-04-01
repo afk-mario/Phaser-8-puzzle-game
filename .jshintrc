@@ -2,6 +2,7 @@
 "globals"       : { 
 "Phaser": false,
 "PIXI": false,
+"WebFontConfig": true,
 "Puzzle": true,
 "Board": true,
 "NumberBlock": true,

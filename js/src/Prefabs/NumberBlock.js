@@ -23,7 +23,7 @@ NumberBlock = function (x, y, number) {
     //this.events.onInputOut.add(outSprite, this);
 
     this.txt = game.add.text(x + 20, y + 20, number, {
-        font: "20px Arial",
+        font: "20px Source Code Pro",
         fill: "#F0F0F0",
         align: "center"
     });
@@ -40,8 +40,8 @@ NumberBlock.prototype.update = function() {
 NumberBlock.prototype.move = function(_to){
     var e = game.add.tween(this);
     var t = game.add.tween(this.txt);
-    e.onStart.add(function(){window.isMoving = true;});
-    e.onComplete.add(function(){window.isMoving = false;})
+    e.onStart.add(function(){isMoving = true;});
+    e.onComplete.add(function(){isMoving = false;})
     switch(_to){
         case 'left':
         e.to({ x: this.x - 50 }, 250, Phaser.Easing.Linear.None, false, 0 , 0, false);

@@ -26,12 +26,14 @@ Board.prototype = Object.create(Phaser.Group.prototype);
 Board.prototype.constructor = Board;
 
 Board.prototype.genFinal = function (){
+	this.moves = 0;
 	this.arrNumbs = [1,2,3,4,5,6,7,8,0];
 	//this.logBoard();
 };
 
 Board.prototype.genRandom = function (){
 	this.arrNumbs = [];
+	this.moves = 0;
 	this.clearBoard();
 	var tempArr = [1,2,3,4,5,6,7,8,0];
 	this.arrNumbs = Phaser.Utils.shuffle(tempArr);
@@ -45,6 +47,7 @@ Board.prototype.genRandom = function (){
 
 Board.prototype.genTest = function (){
 	this.arrNumbs = [];
+	this.moves = 0;
 	this.clearBoard();
 	//this.arrNumbs = [1, 0, 3, 7, 2, 5, 8, 4, 6];
 	//this.arrNumbs = [6,1,4,0,2,5,3,7,8 ];
@@ -178,14 +181,16 @@ Board.prototype.clearTxt = function(child){
 };
 
 Board.prototype.move = function(_where){
-	if(window.isMoving){
+	if(isMoving){
 		return false;
 	}
+	isMoving = true;
 	var position0 = this.checkPosition(0);
 	var numberblock = {};
 	console.log(_where + ' - ', position0);
 	if(_where === 'up'){
 		if(position0 >= 6 && position0 <= 8){
+			isMoving = false;
 			return false;
 		}else{
 			numberblock = this.getAt(position0 + 2);
@@ -199,6 +204,7 @@ Board.prototype.move = function(_where){
 		}
 	}else if(_where == 'down'){
 		if(position0 >= 0 && position0 <= 2){
+			isMoving = false;
 			return false;
 		}else{
 			numberblock = this.getAt(position0 - 3);
@@ -212,6 +218,7 @@ Board.prototype.move = function(_where){
 		}
 	}else if(_where == 'right'){
 		if(position0 === 0 || position0 === 3 || position0 === 6){
+			isMoving = false;
 			return false;
 		}else{
 			numberblock = this.getAt(position0 - 1);
@@ -225,6 +232,7 @@ Board.prototype.move = function(_where){
 		}
 	}else if(_where == 'left'){
 		if(position0 === 2 || position0 === 5 || position0 === 8){
+			isMoving = false;
 			return false;
 		}else{
 			numberblock = this.getAt(position0);
@@ -237,5 +245,7 @@ Board.prototype.move = function(_where){
 			this.arrNumbs[position0 + 1] = 0;
 		}
 	}
+	isMoving = false;
+	this.moves ++;
 	this.logBoard();
 };
