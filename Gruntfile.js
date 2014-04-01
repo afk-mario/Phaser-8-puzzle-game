@@ -9,7 +9,16 @@ module.exports = function(grunt) {
                 separator: ';',
             },
             dist: {
-                src: ['js/lib/Phaser.js','js/src/NumberBlock.js', 'js/src/Board.js', 'js/src/Solver.js', 'js/src/Boot.js', 'js/src/Preloader.js', 'js/src/MainMenu.js', 'js/src/Game.js'],
+                src: [
+                    'js/lib/Phaser.js',
+                    'js/src/Prefabs/NumberBlock.js',
+                    'js/src/Prefabs/Board.js',
+                    'js/src/Solver.js',
+                    'js/src/Main,js',
+                    'js/src/States/Boot.js',
+                    'js/src/States/Preloader.js',
+                    'js/src/States/MainMenu.js',
+                    'js/src/States/Play.js'],
                 dest: 'build/8puzzle.js',
             },
         },
