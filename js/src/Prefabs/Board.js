@@ -6,8 +6,7 @@
 //'use strict';
 
 
-Board = function (game, arrNumbs) {
-	this.game = game;
+Board = function (arrNumbs) {
 	Phaser.Group.call(this, game);
 	this.h = 0;
 	this.isGoal = false;
@@ -146,7 +145,7 @@ Board.prototype.draw = function(){
 	{
 		for (j = 3; j > 0; j--){
 			if (this.arrNumbs[k] !== 0){
-				tmpBlock = new NumberBlock(this.game, (j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k],this);
+				tmpBlock = new NumberBlock((j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k],this);
 				this.add(tmpBlock);
 			}
 			k++;

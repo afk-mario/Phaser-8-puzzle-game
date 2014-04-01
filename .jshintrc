@@ -1,12 +1,25 @@
 {
-"globals"       : { "Phaser": false, "PIXI": false, "Puzzle": true, "Board": true, "NumberBlock": true, "Solver": true},
+"globals"       : { 
+"Phaser": false,
+"PIXI": false,
+"Puzzle": true,
+"Board": true,
+"NumberBlock": true,
+"Solver": true,
+"isMoving": true,
+"BootS": true,
+"PreloaderS": true,
+"MainMenuS": true,
+"PlayS": true,
+"game": true
+},
 // Ignore Environment Globals
 "browser"       : true,   // Standard browser globals e.g. `window`, `document`.
 "couch"         : false,
 "dojo"          : false,
 "jquery"        : true,
 "mootools"      : false,
-"node"          : false,
+"node"          : true,
 "nonstandard"   : false,
 "phantom"       : false,
 "prototypejs"   : false,

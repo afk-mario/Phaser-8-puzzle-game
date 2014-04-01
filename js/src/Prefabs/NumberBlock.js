@@ -3,7 +3,7 @@ Class: NumberBlock
 Author: Arlefreak
 */
 
-NumberBlock = function (game, x, y, number) {
+NumberBlock = function (x, y, number) {
     console.log("Inicia NumberBlock");
     this.number = number;
     this.position = 0;
@@ -22,7 +22,7 @@ NumberBlock = function (game, x, y, number) {
     //this.events.onInputDown.add(this.onDown, this);
     //this.events.onInputOut.add(outSprite, this);
 
-    this.txt = this.game.add.text(x + 20, y + 20, number, {
+    this.txt = game.add.text(x + 20, y + 20, number, {
         font: "20px Arial",
         fill: "#F0F0F0",
         align: "center"
@@ -38,8 +38,8 @@ NumberBlock.prototype.update = function() {
 };
 
 NumberBlock.prototype.move = function(_to){
-    var e = this.game.add.tween(this);
-    var t = this.game.add.tween(this.txt);
+    var e = game.add.tween(this);
+    var t = game.add.tween(this.txt);
     e.onStart.add(function(){window.isMoving = true;});
     e.onComplete.add(function(){window.isMoving = false;})
     switch(_to){
