@@ -1,5 +1,23 @@
 {
+<<<<<<< HEAD:js/.jshintrc
 "globals"       : { "Phaser": false, "PIXI": false, "Puzzle": true, "Board": true, "NumberBlock": true, "Solver": true},
+=======
+"globals"       : { 
+"Phaser": false,
+"PIXI": false,
+"WebFontConfig": true,
+"Puzzle": true,
+"Board": true,
+"NumberBlock": true,
+"Solver": true,
+"isMoving": true,
+"BootS": true,
+"PreloaderS": true,
+"MainMenuS": true,
+"PlayS": true,
+"game": true
+},
+>>>>>>> Reordering code:.jshintrc
 // Ignore Environment Globals
 "browser"       : true,   // Standard browser globals e.g. `window`, `document`.
 "couch"         : false,
