@@ -7,7 +7,7 @@
             game.add.sprite(0, 0, 'frame');
             this.bttSolve = game.add.button(
                 game.world.centerX - 75 , this.world.centerY + 75,
-                'btts', this.quitGame, this,
+                'btts', function(){this.quitGame('mainmenu')}, this,
                 'restart1', 'restart0', 'restart2');
 
             this.bttPlay = game.add.button(
@@ -28,7 +28,7 @@
             this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 
             this.board = new Board();
-            this.board.genRandom();
+            this.board.genTest();
             this.board.draw();
 
             this.upKey.onDown.add(function () { this.board.move('up'); },this);
@@ -38,9 +38,13 @@
         },
         update: function() {
             this.movesTxt.setText('Moves: ' + this.board.moves);
+            if(this.board.isFinal){
+                localStorage.setItem('lastScore',this.board.moves);
+                this.quitGame('leaderboards');
+            }
         },
         
-        quitGame: function () {
+        quitGame: function (state) {
             this.board.clearBoard();
             this.board.destroy();
             this.board = null;
@@ -55,7 +59,7 @@
             this.leftKey = null;
             this.rightKey = null;
             isMoving = false;
-            game.state.start('mainmenu');
+            game.state.start(state);
         },
 
         shuffleBoard: function (){

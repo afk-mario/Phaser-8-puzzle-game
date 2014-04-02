@@ -17,6 +17,7 @@
 var Board = function (arrNumbs) {
 	Phaser.Group.call(this, game);
 	this.h = 0;
+	this.isFinal = false;
 	this.isSolvable = false;
 	this.moves = 0;
 	this.totalCost = 0;
@@ -226,38 +227,8 @@ Board.prototype.move = function(_where){
 	isMoving = false;
 	this.moves ++;
 	var arrFinal = [1,2,3,4,5,6,7,8,0];
-
 	if (this.arrNumbs.equals(arrFinal)){
-		console.log('you win!');
-		game.state.start('leaderboards');
+		this.isFinal = true;
 	}
 	this.logBoard();
 };
-
-// attach the .compare method to Array's prototype to call it on any array
-Array.prototype.equals = function (array) {
-    // if the other array is a falsy value, return
-    if (!array){
-        return false;
-    }
-
-    // compare lengths - can save a lot of time
-    if (this.length != array.length){
-        return false;
-    }
-
-    for (var i = 0, l=this.length; i < l; i++) {
-        // Check if we have nested arrays
-        if (this[i] instanceof Array && array[i] instanceof Array) {
-            // recurse into the nested arrays
-            if (!this[i].compare(array[i])){
-                return false;
-            }
-        }
-        else if (this[i] != array[i]) {
-            // Warning - two different object instances will never be equal: {x:20} != {x:20}
-            return false;
-        }
-    }
-    return true;
-}
