@@ -28,7 +28,7 @@
             this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 
             this.board = new Board();
-            this.board.genTest();
+            this.board.genRandom();
             this.board.draw();
 
             this.upKey.onDown.add(function () { this.board.move('up'); },this);
