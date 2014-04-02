@@ -20,7 +20,7 @@ var Board = function (arrNumbs) {
 	this.isSolvable = false;
 	this.moves = 0;
 	this.totalCost = 0;
-
+	this.position0 = 0;
 	if(arrNumbs){
 		this.arrNumbs = arrNumbs;
 	}
@@ -163,63 +163,63 @@ Board.prototype.move = function(_where){
 		return false;
 	}
 	isMoving = true;
-	var position0 = this.checkPosition(0);
+	this.position0 = this.checkPosition(0);
 	var numberblock = {};
 	if(_where === 'up'){
-		if(position0 >= 6 && position0 <= 8){
+		if(this.position0 >= 6 && this.position0 <= 8){
 			isMoving = false;
 			return false;
 		}else{
-			numberblock = this.getAt(position0 + 2);
+			numberblock = this.getAt(this.position0 + 2);
 			numberblock.move(_where);
 
 			this.remove(numberblock);
-			this.addAt(numberblock,position0);
+			this.addAt(numberblock,this.position0);
 
-			this.arrNumbs[position0] = this.arrNumbs[position0 + 3];
-			this.arrNumbs[position0 + 3] = 0;
+			this.arrNumbs[this.position0] = this.arrNumbs[this.position0 + 3];
+			this.arrNumbs[this.position0 + 3] = 0;
 		}
 	}else if(_where == 'down'){
-		if(position0 >= 0 && position0 <= 2){
+		if(this.position0 >= 0 && this.position0 <= 2){
 			isMoving = false;
 			return false;
 		}else{
-			numberblock = this.getAt(position0 - 3);
+			numberblock = this.getAt(this.position0 - 3);
 			numberblock.move(_where);
 
 			this.remove(numberblock);
-			this.addAt(numberblock,position0 -1);
+			this.addAt(numberblock,this.position0 -1);
 
-			this.arrNumbs[position0] = this.arrNumbs[position0 - 3];
-			this.arrNumbs[position0 - 3] = 0;
+			this.arrNumbs[this.position0] = this.arrNumbs[this.position0 - 3];
+			this.arrNumbs[this.position0 - 3] = 0;
 		}
 	}else if(_where == 'right'){
-		if(position0 === 0 || position0 === 3 || position0 === 6){
+		if(this.position0 === 0 || this.position0 === 3 || this.position0 === 6){
 			isMoving = false;
 			return false;
 		}else{
-			numberblock = this.getAt(position0 - 1);
+			numberblock = this.getAt(this.position0 - 1);
 			numberblock.move(_where);
 
 			this.remove(numberblock);
-			this.addAt(numberblock,position0 - 1);
+			this.addAt(numberblock,this.position0 - 1);
 
-			this.arrNumbs[position0] = this.arrNumbs[position0 - 1];
-			this.arrNumbs[position0 - 1] = 0;
+			this.arrNumbs[this.position0] = this.arrNumbs[this.position0 - 1];
+			this.arrNumbs[this.position0 - 1] = 0;
 		}
 	}else if(_where == 'left'){
-		if(position0 === 2 || position0 === 5 || position0 === 8){
+		if(this.position0 === 2 || this.position0 === 5 || this.position0 === 8){
 			isMoving = false;
 			return false;
 		}else{
-			numberblock = this.getAt(position0);
+			numberblock = this.getAt(this.position0);
 			numberblock.move(_where);
 
 			this.remove(numberblock);
-			this.addAt(numberblock,position0);
+			this.addAt(numberblock,this.position0);
 
-			this.arrNumbs[position0] = this.arrNumbs[position0 + 1];
-			this.arrNumbs[position0 + 1] = 0;
+			this.arrNumbs[this.position0] = this.arrNumbs[this.position0 + 1];
+			this.arrNumbs[this.position0 + 1] = 0;
 		}
 	}
 

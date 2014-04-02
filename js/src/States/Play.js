@@ -41,6 +41,20 @@
         },
         
         quitGame: function () {
+            this.board.clearBoard();
+            this.board.destroy();
+            this.board = null;
+            
+            this.upKey.onDown.removeAll();
+            this.downKey.onDown.removeAll();
+            this.leftKey.onDown.removeAll();
+            this.rightKey.onDown.removeAll();
+
+            this.upKey = null;
+            this.downKey = null;
+            this.leftKey = null;
+            this.rightKey = null;
+            isMoving = false;
             game.state.start('mainmenu');
         },
 
