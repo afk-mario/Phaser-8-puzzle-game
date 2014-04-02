@@ -17,6 +17,8 @@ module.exports = function(grunt) {
                     'js/src/States/Boot.js',
                     'js/src/States/Preloader.js',
                     'js/src/States/MainMenu.js',
+                    'js/src/States/Credits.js',
+                    'js/src/States/LeaderBoards.js',
                     'js/src/States/Play.js',
                     'js/src/Main.js'],
                 dest: 'build/8puzzle.js',
