@@ -12,6 +12,8 @@
 "PreloaderS": true,
 "MainMenuS": true,
 "PlayS": true,
+"CreditsS": true,
+"LeaderBoardsS": true,
 "game": true
 },
 // Ignore Environment Globals

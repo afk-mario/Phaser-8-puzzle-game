@@ -3,7 +3,9 @@ Solver
 Author: Arlefreak
 */
 
-Solver = function (boardI, boardF) {
+'use strict';
+
+var Solver = function (boardI, boardF) {
     this.open = [];
     this.close = [];
     this.moves = 0;

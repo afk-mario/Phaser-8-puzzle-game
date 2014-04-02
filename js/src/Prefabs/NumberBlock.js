@@ -3,7 +3,9 @@ Class: NumberBlock
 Author: Arlefreak
 */
 
-NumberBlock = function (x, y, number) {
+'use strict';
+
+var NumberBlock = function (x, y, number) {
     console.log("Inicia NumberBlock");
     this.number = number;
     this.position = 0;

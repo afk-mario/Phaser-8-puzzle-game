@@ -4,14 +4,14 @@
     Play.prototype = {
         create: function() {
             game.stage.backgroundColor = '#FFF';
-            game.add.sprite(25, 0, 'frame');
+            game.add.sprite(0, 0, 'frame');
             this.bttSolve = game.add.button(
-                game.world.centerX - 75 , this.world.centerY + 60,
-                'btts', this.solvedBoard, this,
+                game.world.centerX - 75 , this.world.centerY + 75,
+                'btts', this.quitGame, this,
                 'restart1', 'restart0', 'restart2');
 
             this.bttPlay = game.add.button(
-                game.world.centerX , this.world.centerY + 60,
+                game.world.centerX , this.world.centerY + 75,
                 'btts', this.shuffleBoard, this,
                 'random1', 'random0', 'random2');
             
@@ -28,7 +28,7 @@
             this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 
             this.board = new Board();
-            this.board.genFinal();
+            this.board.genRandom();
             this.board.draw();
 
             this.upKey.onDown.add(function () { this.board.move('up'); },this);
@@ -41,7 +41,7 @@
         },
         
         quitGame: function () {
-            game.state.start('MainMenu');
+            game.state.start('mainmenu');
         },
 
         shuffleBoard: function (){
@@ -51,7 +51,7 @@
             this.board.draw();
         },
 
-        solvedBoard: function (){
+        solveBoard: function (){
             var fn  = new Board();
             fn.genFinal();
             var solver = new Solver(this.board,fn);

@@ -12,9 +12,9 @@
 * This is a Simple 8Puzzle game made with Phaser
 *
 */
+'use strict';
 
-
-Board = function (arrNumbs) {
+var Board = function (arrNumbs) {
 	Phaser.Group.call(this, game);
 	this.h = 0;
 	this.isSolvable = false;
@@ -126,7 +126,7 @@ Board.prototype.draw = function(){
 	{
 		for (j = 3; j > 0; j--){
 			if (this.arrNumbs[k] !== 0){
-				tmpBlock = new NumberBlock((j-3)*-50 + 50 , (i-3)*-50 + 50,this.arrNumbs[k],this);
+				tmpBlock = new NumberBlock((j-3)*-50 + 25, (i-3)*-50 + 50,this.arrNumbs[k],this);
 				this.add(tmpBlock);
 			}
 			k++;
@@ -225,5 +225,39 @@ Board.prototype.move = function(_where){
 
 	isMoving = false;
 	this.moves ++;
+	var arrFinal = [1,2,3,4,5,6,7,8,0];
+
+	if (this.arrNumbs.equals(arrFinal)){
+		console.log('you win!');
+		game.state.start('leaderboards');
+	}
 	this.logBoard();
 };
+
+// attach the .compare method to Array's prototype to call it on any array
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array){
+        return false;
+    }
+
+    // compare lengths - can save a lot of time
+    if (this.length != array.length){
+        return false;
+    }
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].compare(array[i])){
+                return false;
+            }
+        }
+        else if (this[i] != array[i]) {
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;
+        }
+    }
+    return true;
+}
