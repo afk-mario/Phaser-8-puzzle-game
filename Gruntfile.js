@@ -30,7 +30,7 @@ module.exports = function(grunt) {
                 dest: 'build/8puzzle.js',             // destination directory or file
                 replacements: [{
                   from: 'js/res/',                   // string replacement
-                  to: '/static/Games/8puzzle/assets/'
+                  to: 'assets/'
               }]
           }            
       },  
